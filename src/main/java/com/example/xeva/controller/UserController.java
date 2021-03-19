@@ -84,11 +84,12 @@ public class UserController {
 //        Event event = new Event(user,tempOtg2,"OnewOO","myname",(byte)4,  true,time,"myname","myname","myname","myname",(byte)1);
 //        eventService.save(event);
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
     
     @GetMapping(value="/nothing") //only for tests
     public ResponseEntity<?> not(){
         return ResponseEntity.ok("ok");
     }
+
 }
