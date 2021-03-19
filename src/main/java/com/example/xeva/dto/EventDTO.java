@@ -1,9 +1,11 @@
 package com.example.xeva.dto;
 
+import com.example.xeva.model.Organization;
 
 public class EventDTO {
 
     public String username;
+    public Organization organization;
     public String eventName;
     public String description;
     public String daysOfWeek;
@@ -13,29 +15,10 @@ public class EventDTO {
     public String tags;
     public String language;
     public int status;
-    public String startDate;
-    public String endDate;
 
-    @Override
-    public String toString() {
-        return "EventDTO{" +
-                "username='" + username + '\'' +
-                ", eventName='" + eventName + '\'' +
-                ", description='" + description + '\'' +
-                ", daysOfWeek='" + daysOfWeek + '\'' +
-                ", cyclical=" + cyclical +
-                ", mode='" + mode + '\'' +
-                ", webAddress='" + webAddress + '\'' +
-                ", tags='" + tags + '\'' +
-                ", language='" + language + '\'' +
-                ", status=" + status +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                '}';
-    }
-
-    public EventDTO(String username, String eventName, String description, String daysOfWeek, int cyclical, String mode, String webAddress, String tags, String language, int status, String startDate, String endDate) {
+    public EventDTO(String username, Organization organization, String eventName, String description, String daysOfWeek, int cyclical, String mode, String webAddress, String tags, String language, int status) {
         this.username = username;
+        this.organization = organization;
         this.eventName = eventName;
         this.description = description;
         this.daysOfWeek = daysOfWeek;
@@ -45,8 +28,31 @@ public class EventDTO {
         this.tags = tags;
         this.language = language;
         this.status = status;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "EventDTO{" +
+                "username='" + username + '\'' +
+                ", organization=" + organization +
+                ", eventName='" + eventName + '\'' +
+                ", description='" + description + '\'' +
+                ", daysOfWeek='" + daysOfWeek + '\'' +
+                ", cyclical=" + cyclical +
+                ", mode='" + mode + '\'' +
+                ", webAddress='" + webAddress + '\'' +
+                ", tags='" + tags + '\'' +
+                ", language='" + language + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public String getUsername() {
@@ -129,19 +135,4 @@ public class EventDTO {
         this.status = status;
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
 }
