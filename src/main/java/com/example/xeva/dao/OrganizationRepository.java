@@ -9,6 +9,7 @@ import com.example.xeva.model.Organization;
 
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization,Integer>{
+
 	List findAll();
 	Organization findByName(String name);
 	Organization findById(int id);

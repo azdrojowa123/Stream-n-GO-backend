@@ -4,7 +4,8 @@ import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dao.RoleRepository;
 import com.example.xeva.dao.UserRepository;
-import com.example.xeva.model.Event;
+import com.example.xeva.dto.EventDTO;
+import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.JwtRequest;
 import com.example.xeva.model.Organization;
 import com.example.xeva.model.Role;
@@ -63,6 +64,9 @@ public class UserController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private EventMapper eventMapper;
+
 
     @PostMapping(value="/signin")
     public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {
@@ -83,6 +87,7 @@ public class UserController {
 //        Time time = new Time(now);
 //        Event event = new Event(user,tempOtg2,"OnewOO","myname",(byte)4,  true,time,"myname","myname","myname","myname",(byte)1);
 //        eventService.save(event);
+
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

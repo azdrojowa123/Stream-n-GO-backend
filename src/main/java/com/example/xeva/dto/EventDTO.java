@@ -9,12 +9,12 @@ public class EventDTO {
     public String eventName;
     public String description;
     public String daysOfWeek;
-    public int cyclical;
+    public int cyclicalInt;
     public String mode;
     public String webAddress;
     public String tags;
     public String language;
-    public int status;
+    public int statusInt;
 
     public EventDTO(String username, Organization organization, String eventName, String description, String daysOfWeek, int cyclical, String mode, String webAddress, String tags, String language, int status) {
         this.username = username;
@@ -22,12 +22,12 @@ public class EventDTO {
         this.eventName = eventName;
         this.description = description;
         this.daysOfWeek = daysOfWeek;
-        this.cyclical = cyclical;
+        this.cyclicalInt = cyclical;
         this.mode = mode;
         this.webAddress = webAddress;
         this.tags = tags;
         this.language = language;
-        this.status = status;
+        this.statusInt = status;
     }
 
     @Override
@@ -38,12 +38,12 @@ public class EventDTO {
                 ", eventName='" + eventName + '\'' +
                 ", description='" + description + '\'' +
                 ", daysOfWeek='" + daysOfWeek + '\'' +
-                ", cyclical=" + cyclical +
+                ", cyclical=" + cyclicalInt +
                 ", mode='" + mode + '\'' +
                 ", webAddress='" + webAddress + '\'' +
                 ", tags='" + tags + '\'' +
                 ", language='" + language + '\'' +
-                ", status=" + status +
+                ", status=" + statusInt +
                 '}';
     }
 
@@ -88,11 +88,11 @@ public class EventDTO {
     }
 
     public int getCyclical() {
-        return cyclical;
+        return cyclicalInt;
     }
 
     public void setCyclical(int cyclical) {
-        this.cyclical = cyclical;
+        this.cyclicalInt = cyclical;
     }
 
     public String getMode() {
@@ -127,12 +127,12 @@ public class EventDTO {
         this.language = language;
     }
 
-    public int getStatus() {
-        return status;
+    public int getStatusInt() {
+        return statusInt;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatusInt(int statusInt) {
+        this.statusInt = statusInt;
     }
 
 }
