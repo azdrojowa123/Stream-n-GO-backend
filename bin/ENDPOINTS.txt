@@ -1,0 +1,6 @@
+1. /signin(@RequestBody JwtRequest) -> return JWT token after successful login or return 401/500 error.
+    500 error (BAD REQUEST) gone with JSON object:
+    {
+        field_name: what was invalid in this field,
+        ....
+    }
