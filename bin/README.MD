@@ -1,7 +1,7 @@
 INSTALACJA:
 ---
     narzędzia:
-    intellij, JDK 11
+    intellij, JDK 11 (oracle distribution)
 
     proces uruchomienia:
     1.zmiana ustawień na swoją bazę w application.properties

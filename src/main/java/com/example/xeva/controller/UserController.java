@@ -74,16 +74,13 @@ public class UserController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
 
-//        User user = userRepository.findById(1);
-//        Organization org = organizationRepository.findById(1);
-//        Organization tempOrg = new Organization("TEMP", "TEMP", "TEMP", "TEMP", "TEMP",
-//                "TEMP", "TEMP", 32323232, "TEMP", "TEMP", "TEMP");
-//        Organization tempOtg2 = organizationRepository.findById(14);
-//        long now = System.currentTimeMillis();
-//        Time time = new Time(now);
-//        Event event = new Event(user,tempOtg2,"OnewOO","myname",(byte)4,  true,time,"myname","myname","myname","myname",(byte)1);
-//        eventService.save(event);
-
+      //  User user = userRepository.findById(1);
+      //  Organization org = organizationRepository.findById(1);
+     //   Organization tempOrg = new Organization("TEMP", "TEMP", "TEMP", "TEMP", "TEMP",
+       //         "TEMP", "TEMP", 32323232, "TEMP", "TEMP", "TEMP");
+       // Organization tempOtg2 = organizationRepository.findById(14);
+       // Event event = new Event(user,tempOtg2,"OnewOO","myname","DSSD", true,"myname","myname","myname","myname",(byte)1);
+       // eventService.save(event);
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }
     

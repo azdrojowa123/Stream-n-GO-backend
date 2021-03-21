@@ -30,16 +30,12 @@ public class Event {
 	@Column(name = "Description")
 	private String description;
 
-
-	@Column(name = "DaysOfWeek")
-	private byte daysOfWeek;
-	
+	@NotEmpty(message = "Days of week cannot be empty")
+	@Column(name = "days_of_week")
+	private String daysOfWeek;
 
 	@Column(name = "Cyclical")
 	private boolean cyclical;
-
-	@Column(name = "Duration")
-	private Time duration;
 	
 	@NotEmpty(message = "Mode cannot be empty")
 	@Column(name = "Mode")
@@ -56,7 +52,6 @@ public class Event {
 	@Column(name = "Language")
 	private String language;
 	
-
 	@Column(name = "Status")
 	private byte status;
 	
@@ -67,14 +62,13 @@ public class Event {
 		
 	}
 
-	public Event(User user, Organization organization,  String name,  String description, byte daysOfWeek, boolean cyclical, Time duration, String mode, String webAddress, String tags,String language, byte status) {
+	public Event(User user, Organization organization,  String name,  String description, String daysOfWeek, boolean cyclical, String mode, String webAddress, String tags,String language, byte status) {
 		this.user = user;
 		this.organization = organization;
 		this.name = name;
 		this.description = description;
 		this.daysOfWeek = daysOfWeek;
 		this.cyclical = cyclical;
-		this.duration = duration;
 		this.mode = mode;
 		this.webAddress = webAddress;
 		this.tags = tags;
@@ -138,11 +132,11 @@ public class Event {
 		this.description = description;
 	}
 
-	public byte getDaysOfWeek() {
+	public String getDaysOfWeek() {
 		return daysOfWeek;
 	}
 
-	public void setDaysOfWeek(byte daysOfWeek) {
+	public void setDaysOfWeek(String daysOfWeek) {
 		this.daysOfWeek = daysOfWeek;
 	}
 
@@ -152,14 +146,6 @@ public class Event {
 
 	public void setCyclical(boolean cyclical) {
 		this.cyclical = cyclical;
-	}
-
-	public Time getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Time duration) {
-		this.duration = duration;
 	}
 
 	public String getMode() {

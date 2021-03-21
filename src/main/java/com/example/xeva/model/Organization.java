@@ -47,7 +47,6 @@ public class Organization {
 	@Column(name = "NIP")
 	private String nip;
 	
-
 	@Column(name = "Phone_number")
 	private long phoneNumber;
 	
@@ -68,7 +67,7 @@ public class Organization {
 		
 	}	
 
-	public Organization( String name, String country, String province, String city, String postalCode,
+	public Organization(String name, String country, String province, String city, String postalCode,
 			 String street, String nip, long phoneNumber, String email, String webPage, String photo) {
 		this.name = name;
 		this.country = country;
