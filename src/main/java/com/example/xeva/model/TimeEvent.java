@@ -20,11 +20,9 @@ public class TimeEvent {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty(message = "start date cannot be empty")
 	@Column(name = "Start_date")
 	private Date startDate;
-	
-	@NotEmpty(message = "end date cannot be empty")
+
 	@Column(name = "End_date")
 	private Date endDate;
 	
