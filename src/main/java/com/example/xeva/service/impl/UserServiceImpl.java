@@ -1,14 +1,15 @@
-package com.example.xeva.service;
+package com.example.xeva.service.impl;
 
 import com.example.xeva.dao.UserRepository;
 import com.example.xeva.model.User;
+import com.example.xeva.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;

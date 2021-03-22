@@ -1,48 +1,60 @@
 package com.example.xeva.mapper;
 
 import com.example.xeva.dao.OrganizationRepository;
-import com.example.xeva.dao.UserRepository;
 import com.example.xeva.dto.EventDTO;
 import com.example.xeva.model.Event;
 import com.example.xeva.model.Organization;
 import com.example.xeva.model.User;
-import com.example.xeva.service.UserService;
+import com.example.xeva.service.interfaces.OrganizationService;
+import com.example.xeva.service.interfaces.UserService;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = "spring", uses = UserService.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", uses = {UserService.class, OrganizationService.class}, injectionStrategy = InjectionStrategy.FIELD)
 public abstract class EventMapper {
-
 
     private UserService userService;
 
-    private OrganizationRepository organizationRepository;
+    private OrganizationService organizationService;
 
-    public Event toEventMapper(EventDTO dto){
+    public Event toEvent(EventDTO dto){
         Event newEvent = new Event();
+        System.out.println("mapper"+dto.getUsername());
         User eventOwner = userService.findByEmail(dto.getUsername());
         Organization org = checkIfOrgExsist(dto.getOrganization());
+        newEvent.setUser(eventOwner);
+        newEvent.setOrganization(org);
+        newEvent.setName(dto.getEventName());
+        newEvent.setDescription(dto.getDescription());
+        newEvent.setDaysOfWeek(dto.getDaysOfWeek());
         newEvent.setCyclical(dto.cyclicalInt == 1);
-        newEvent.setCyclical(dto.getStatusInt() == 1);
+        newEvent.setMode(dto.getMode());
+        newEvent.setWebAddress(dto.getWebAddress());
+        newEvent.setTags(dto.getTags());
+        newEvent.setLanguage(dto.getLanguage());
+        newEvent.setStatus(dto.getStatusInt() == 1);
 
         return newEvent;
     }
 
    public  Organization checkIfOrgExsist(Organization org){
-       if(organizationRepository.findByName(org.getName()) != null){
-           return organizationRepository.findByName(org.getName());
+       if(organizationService.findByName(org.getName()) != null){
+           return organizationService.findByName(org.getName());
        } else {
            return org;
        }
    }
 
 
-    public void setUserService(UserService userService) {
+   @Autowired
+    public final void setUserService(UserService userService) {
+
         this.userService = userService;
     }
 
-    public void setOrganizationRepository(OrganizationRepository organizationRepository) {
-        this.organizationRepository = organizationRepository;
+    @Autowired
+    public void setOrganizationService(OrganizationService organizationService) {
+        this.organizationService = organizationService;
     }
 }

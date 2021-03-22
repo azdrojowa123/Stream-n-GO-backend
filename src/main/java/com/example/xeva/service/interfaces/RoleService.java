@@ -1,4 +1,4 @@
-package com.example.xeva.service;
+package com.example.xeva.service.interfaces;
 
 import com.example.xeva.model.Role;
 

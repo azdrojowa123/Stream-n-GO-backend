@@ -53,7 +53,7 @@ public class Event {
 	private String language;
 	
 	@Column(name = "Status")
-	private byte status;
+	private boolean status;
 	
 	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
 	Set<TimeEvent> timeEvents;
@@ -62,7 +62,7 @@ public class Event {
 		
 	}
 
-	public Event(User user, Organization organization,  String name,  String description, String daysOfWeek, boolean cyclical, String mode, String webAddress, String tags,String language, byte status) {
+	public Event(User user, Organization organization,  String name,  String description, String daysOfWeek, boolean cyclical, String mode, String webAddress, String tags,String language, boolean status) {
 		this.user = user;
 		this.organization = organization;
 		this.name = name;
@@ -76,11 +76,11 @@ public class Event {
 		this.status = status;
 	}
 
-	public byte getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

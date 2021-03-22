@@ -46,6 +46,7 @@ public class EventDTO {
                 ", status=" + statusInt +
                 '}';
     }
+    public EventDTO(){}
 
     public Organization getOrganization() {
         return organization;
