@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class UserController {
@@ -51,7 +52,6 @@ public class UserController {
 
     @Autowired
     private EventMapper eventMapper;
-
 
     @PostMapping(value="/signin")
     public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {

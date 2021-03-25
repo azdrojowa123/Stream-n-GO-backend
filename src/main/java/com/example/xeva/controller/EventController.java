@@ -29,7 +29,39 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+class ObjHolder{
+
+    EventDTO eventDTO;
+    String dateS;
+    String dateE;
+
+    public EventDTO getEventDTO() {
+        return eventDTO;
+    }
+
+    public void setEventDTO(EventDTO eventDTO) {
+        this.eventDTO = eventDTO;
+    }
+
+    public String getDateS() {
+        return dateS;
+    }
+
+    public void setDateS(String dateS) {
+        this.dateS = dateS;
+    }
+
+    public String getDateE() {
+        return dateE;
+    }
+
+    public void setDateE(String dateE) {
+        this.dateE = dateE;
+    }
+}
 
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
@@ -54,16 +86,14 @@ public class EventController {
     private TimeEventService timeEventService;
 
     @PostMapping(value="/createEvent")
-    public ResponseEntity<?> create(@Valid @RequestBody EventDTO eventDTO){
-
-        Event event =  eventMapper.toEvent(eventDTO);
+    public ResponseEntity<?> create(@Valid @RequestBody ObjHolder objHolder){
+        Event event =  eventMapper.toEvent(objHolder.getEventDTO());
         eventService.save(event);
         if( !event.isCyclical() ){
-            Timestamp dateB = Timestamp.valueOf(String.format("%04d-%02d-%02d %02d:%02d:00",
-                    2021, 3, 25, 13, 30));
-            Timestamp dateE = Timestamp.valueOf(String.format("%04d-%02d-%02d %02d:%02d:00",
-                    2021, 3, 25, 14, 30));
-            TimeEvent te = new TimeEvent(dateB, dateE, event);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateStart = LocalDateTime.parse(objHolder.getDateS(), dateTimeFormatter);
+            LocalDateTime dateEnd = LocalDateTime.parse(objHolder.getDateE(), dateTimeFormatter);
+            TimeEvent te = new TimeEvent(dateStart, dateEnd, event);
             timeEventService.save(te);
         }
 
