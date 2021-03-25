@@ -4,3 +4,11 @@
         field_name: what was invalid in this field,
         ....
     }
+
+2. /createEvent(@RequestBody ObjHolder objHolder) -> returns response 200 after succesfull event insert.
+   class ObjHolder{
+
+    EventDTO eventDTO; -> event dto object
+    String dateS; -> start Date of event
+    String dateE; -> end Date of event
+   } 
