@@ -3,11 +3,8 @@ package com.example.xeva.controller;
 import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dao.UserRepository;
-import com.example.xeva.dto.EventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.JwtRequest;
-import com.example.xeva.model.Organization;
-import com.example.xeva.model.Event;
 import com.example.xeva.security.JwtTokenUtil;
 import com.example.xeva.security.UserDetailsImpl;
 
@@ -24,11 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class UserController {
-
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -60,7 +55,7 @@ public class UserController {
 
     @PostMapping(value="/signin")
     public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {
-        try{
+       try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUsername(),req.getPassword()));
         }catch (Exception e) {
             throw new Exception("invalid credentials", e);
@@ -68,19 +63,6 @@ public class UserController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
 
-
-       //  User user = userRepository.findById(1);
-       Organization org = organizationRepository.findById(1);
-       //   Organization tempOrg = new Organization("TEMP", "TEMP", "TEMP", "TEMP", "TEMP",
-       //         "TEMP", "TEMP", 32323232, "TEMP", "TEMP", "TEMP");
-       // Organization tempOtg2 = organizationRepository.findById(14);
-       // Event event = new Event(user,tempOtg2,"OnewOO","myname","DSSD", true,"myname","myname","myname","myname",(byte)1);
-       // eventService.save(event);
-
-        EventDTO dto = new EventDTO("diam@sed.org",org,"name22","desc","MONDAY,TUESDAY ",1,"mode","webaddress","tags","language",1);
-
-        Event check =  eventMapper.toEvent(dto);
-        eventService.save(check);
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }
     
