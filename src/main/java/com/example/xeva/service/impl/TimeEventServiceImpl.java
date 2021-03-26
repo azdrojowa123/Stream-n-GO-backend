@@ -16,4 +16,9 @@ public class TimeEventServiceImpl implements TimeEventService {
     public void save(TimeEvent timeEvent) {
         timeEventRepository.save(timeEvent);
     }
+
+    @Override
+    public TimeEvent findById(int id) {
+        return timeEventRepository.findById(id);
+    }
 }

@@ -10,5 +10,5 @@ import com.example.xeva.model.User;
 public interface TimeEventRepository extends JpaRepository<TimeEvent,Integer>{
 	
 	List findAll();
-    User findById(int id);
+    TimeEvent findById(int id);
 }

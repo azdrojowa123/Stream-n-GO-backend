@@ -9,15 +9,13 @@ import java.time.LocalDateTime;
 class ObjHolder {
 
     EventDTO eventDTO;
-    //String dateS;
-    //String dateE;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateS;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime dateE;
+    private LocalDateTime dateF;
 
     public LocalDateTime getDateS() {
         return dateS;
@@ -27,12 +25,12 @@ class ObjHolder {
         this.dateS = dateS;
     }
 
-    public LocalDateTime getDateE() {
-        return dateE;
+    public LocalDateTime getDateF() {
+        return dateF;
     }
 
-    public void setDateE(LocalDateTime dateE) {
-        this.dateE = dateE;
+    public void setDateF(LocalDateTime dateF) {
+        this.dateF = dateF;
     }
 
     public EventDTO getEventDTO() {
@@ -43,19 +41,4 @@ class ObjHolder {
         this.eventDTO = eventDTO;
     }
 
-    /*public String getDateS() {
-        return dateS;
-    }
-
-    public void setDateS(String dateS) {
-        this.dateS = dateS;
-    }
-
-    public String getDateE() {
-        return dateE;
-    }
-
-    public void setDateE(String dateE) {
-        this.dateE = dateE;
-    }*/
 }

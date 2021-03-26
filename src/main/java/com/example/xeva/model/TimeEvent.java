@@ -3,15 +3,9 @@ package com.example.xeva.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -31,6 +25,9 @@ public class TimeEvent {
 	@ManyToOne
     @JoinColumn(name="Event_id", nullable = false)
     private Event event;
+
+	@ManyToMany(mappedBy = "savedEvents")
+	Set<User> savedBy;
 	
 	public TimeEvent() {
 		
@@ -42,6 +39,21 @@ public class TimeEvent {
 		this.event = event;
 	}
 
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public Set<User> getSavedBy() {
+		return savedBy;
+	}
+
+	public void setSavedBy(Set<User> savedBy) {
+		this.savedBy = savedBy;
+	}
 
 	public int getId() {
 		return id;

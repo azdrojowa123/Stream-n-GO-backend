@@ -57,6 +57,8 @@ public class Event {
 	
 	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
 	Set<TimeEvent> timeEvents;
+
+
 	
 	public Event() {
 		
@@ -75,6 +77,11 @@ public class Event {
 		this.language = language;
 		this.status = status;
 	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
 
 	public boolean getStatus() {
 		return status;

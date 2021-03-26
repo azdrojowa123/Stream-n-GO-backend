@@ -28,6 +28,14 @@ public class User {
     @JoinColumn(name="Role_id", nullable = false)
     private Role role;
 
+    @ManyToMany
+    @JoinTable(
+            name="user_events",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="event_id")
+    )
+    Set<TimeEvent> savedEvents;
+
     public User(String name, String email, String pwd, Role role) {
         this.name = name;
         this.email = email;
@@ -38,6 +46,21 @@ public class User {
     public User() {
     }
 
+    public Set<Event> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<Event> users) {
+        this.users = users;
+    }
+
+    public Set<TimeEvent> getSavedEvents() {
+        return savedEvents;
+    }
+
+    public void setSavedEvents(Set<TimeEvent> savedEvents) {
+        this.savedEvents = savedEvents;
+    }
 
     public int getId() {
         return id;

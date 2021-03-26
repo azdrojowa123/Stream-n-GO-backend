@@ -20,7 +20,6 @@ public abstract class EventMapper {
 
     public Event toEvent(EventDTO dto){
         Event newEvent = new Event();
-        System.out.println("mapper"+dto.getUsername());
         User eventOwner = userService.findByEmail(dto.getUsername());
         Organization org = checkIfOrgExsist(dto.getOrganization());
         newEvent.setUser(eventOwner);
