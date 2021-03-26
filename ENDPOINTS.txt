@@ -6,7 +6,7 @@
     }
 
 2. /createEvent(@RequestBody ObjHolder objHolder) -> returns response 200 after succesfull event insert.
-   informacje dokładne co do objHolder na slacku
+   informacje dokładne co do objHolder na trello
 
 3. /event/fetchDay?day={day} -> zwraca wszystkie eventy z danego dnia w postaci ResponseEventDTO
     day -> String w postaci yyyy-MM-dd
