@@ -67,14 +67,6 @@ class ObjHolder{
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class EventController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
 
     @Autowired
     private EventService eventService;
