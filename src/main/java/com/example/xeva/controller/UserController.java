@@ -2,6 +2,7 @@ package com.example.xeva.controller;
 
 import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
+import com.example.xeva.dao.TimeEventRepository;
 import com.example.xeva.dao.UserRepository;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.JwtRequest;
@@ -23,7 +24,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.List;
 
 
 @RestController
@@ -60,6 +64,9 @@ public class UserController {
     @Autowired
     private TimeEventService timeEventService;
 
+    @Autowired
+    private TimeEventRepository timeEventRepository;
+
     @PostMapping(value="/signin")
     public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {
        try{
@@ -69,8 +76,7 @@ public class UserController {
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
-//        TimeEvent temp = timeEventService.findById(1);
-//        System.out.println("size of list event"+temp.getSavedBy().size());
+
 //
 //        for (Iterator<User> it = temp.getSavedBy().iterator(); it.hasNext(); ) {
 //            User f = it.next();

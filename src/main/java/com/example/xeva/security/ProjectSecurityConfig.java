@@ -46,6 +46,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/signin").permitAll()
                 .antMatchers("/createEvent").permitAll()
+                .antMatchers("/event/**").permitAll()
                 .antMatchers("/nothing").hasRole("admin")
                 .anyRequest().authenticated();
     }

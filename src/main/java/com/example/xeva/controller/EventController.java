@@ -6,11 +6,13 @@ import com.example.xeva.service.interfaces.EventService;
 import com.example.xeva.service.interfaces.GeneratorService;
 import com.example.xeva.service.interfaces.TimeEventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,7 @@ public class EventController {
 
     @Autowired
     private GeneratorService generatorService;
+
 
     @PostMapping(value="/createEvent")
     public ResponseEntity<?> create(@Valid @RequestBody ObjHolder objHolder){
@@ -56,6 +59,16 @@ public class EventController {
         }
         return ResponseEntity.ok().build();
     }
-    
+
+    @GetMapping("/event/fetchDay") //http:localhost:8080/event/fetchDay?day=2021-03-30
+    public ResponseEntity<List<TimeEvent>> create(@RequestParam String day) {
+
+        LocalDate ld = LocalDate.parse( day );
+        List<TimeEvent> listOfEvents = timeEventService.findFromDay(ld);
+
+        return new ResponseEntity(listOfEvents, HttpStatus.OK);
+
+    }
+
 
 }
