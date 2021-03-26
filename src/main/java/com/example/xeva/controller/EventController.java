@@ -32,37 +32,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class ObjHolder{
-
-    EventDTO eventDTO;
-    String dateS;
-    String dateE;
-
-    public EventDTO getEventDTO() {
-        return eventDTO;
-    }
-
-    public void setEventDTO(EventDTO eventDTO) {
-        this.eventDTO = eventDTO;
-    }
-
-    public String getDateS() {
-        return dateS;
-    }
-
-    public void setDateS(String dateS) {
-        this.dateS = dateS;
-    }
-
-    public String getDateE() {
-        return dateE;
-    }
-
-    public void setDateE(String dateE) {
-        this.dateE = dateE;
-    }
-}
-
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class EventController {
@@ -82,10 +51,7 @@ public class EventController {
         Event event =  eventMapper.toEvent(objHolder.getEventDTO());
         eventService.save(event);
         if( !event.isCyclical() ){
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime dateStart = LocalDateTime.parse(objHolder.getDateS(), dateTimeFormatter);
-            LocalDateTime dateEnd = LocalDateTime.parse(objHolder.getDateE(), dateTimeFormatter);
-            TimeEvent te = new TimeEvent(dateStart, dateEnd, event);
+            TimeEvent te = new TimeEvent(objHolder.getDateE(), objHolder.getDateS(), event);
             timeEventService.save(te);
         }
 
