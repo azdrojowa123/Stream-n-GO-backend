@@ -6,9 +6,15 @@
     }
 
 2. /createEvent(@RequestBody ObjHolder objHolder) -> returns response 200 after succesfull event insert.
-   class ObjHolder{
+   informacje dokładne co do objHolder na slacku
 
-    EventDTO eventDTO; -> event dto object
-    String dateS; -> start Date of event
-    String dateE; -> end Date of event
-   } 
+3. /event/fetchDay?day={day} -> zwraca wszystkie eventy z danego dnia w postaci ResponseEventDTO
+    day -> String w postaci yyyy-MM-dd
+    ResponseEventDTO -> {
+         organizationName: String;
+         eventName: String;
+         tags: String;
+         language: String;
+         dateS: LocalDateTime (w postaci yyyy-MM-dd)
+         dateF: LocalDateTime (w postaci yyyy-MM-dd);
+    }

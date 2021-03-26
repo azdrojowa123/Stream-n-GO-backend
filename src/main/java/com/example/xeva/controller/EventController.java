@@ -1,5 +1,6 @@
 package com.example.xeva.controller;
 
+import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
 import com.example.xeva.service.interfaces.EventService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,6 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class EventController {
-
 
     @Autowired
     private EventService eventService;
@@ -60,13 +61,18 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/event/fetchDay") //http:localhost:8080/event/fetchDay?day=2021-03-30
-    public ResponseEntity<List<TimeEvent>> create(@RequestParam String day) {
+    //http:localhost:8080/event/fetchDay?day=2021-03-30
+    @GetMapping("/event/fetchDay")
+    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day) {
 
         LocalDate ld = LocalDate.parse( day );
         List<TimeEvent> listOfEvents = timeEventService.findFromDay(ld);
+        List<ResponseEventDTO> listOfResponses = new ArrayList<>();
+        for(TimeEvent timeEvent: listOfEvents){
+            listOfResponses.add(eventMapper.toResponseEvent(timeEvent));
+        }
 
-        return new ResponseEntity(listOfEvents, HttpStatus.OK);
+        return new ResponseEntity(listOfResponses, HttpStatus.OK);
 
     }
 

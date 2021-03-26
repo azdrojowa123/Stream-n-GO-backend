@@ -2,8 +2,10 @@ package com.example.xeva.mapper;
 
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.EventDTO;
+import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.model.Event;
 import com.example.xeva.model.Organization;
+import com.example.xeva.model.TimeEvent;
 import com.example.xeva.model.User;
 import com.example.xeva.service.interfaces.OrganizationService;
 import com.example.xeva.service.interfaces.UserService;
@@ -35,6 +37,18 @@ public abstract class EventMapper {
         newEvent.setStatus(dto.getStatusInt() == 1);
 
         return newEvent;
+    }
+
+    public ResponseEventDTO toResponseEvent(TimeEvent timeEvent){
+        ResponseEventDTO responseEventDTO = new ResponseEventDTO();
+        responseEventDTO.setOrganizationName(timeEvent.getEvent().getOrganization().getName());
+        responseEventDTO.setEventName(timeEvent.getEvent().getName());
+        responseEventDTO.setTags(timeEvent.getEvent().getTags());
+        responseEventDTO.setLanguage(timeEvent.getEvent().getLanguage());
+        responseEventDTO.setDateS(timeEvent.getStartDate());
+        responseEventDTO.setDateF(timeEvent.getEndDate());
+
+        return responseEventDTO;
     }
 
    public  Organization checkIfOrgExsist(Organization org){
