@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -76,12 +77,13 @@ public class UserController {
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
+        User temp = userService.findById(1);
 
-//
-//        for (Iterator<User> it = temp.getSavedBy().iterator(); it.hasNext(); ) {
-//            User f = it.next();
-//            System.out.println(f.getName());
-//        }
+
+        for (Iterator<TimeEvent> it = temp.getSavedEvents().iterator(); it.hasNext(); ) {
+            TimeEvent f = it.next();
+            System.out.println(f.getStartDate());
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

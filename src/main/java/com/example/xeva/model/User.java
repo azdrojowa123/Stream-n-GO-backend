@@ -32,7 +32,7 @@ public class User {
     @JoinTable(
             name="user_events",
             joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name="event_id")
+            inverseJoinColumns = @JoinColumn(name="time_event_id")
     )
     Set<TimeEvent> savedEvents;
 
