@@ -1,80 +1,28 @@
 package com.example.xeva.controller;
 
-import com.example.xeva.dao.EventRepository;
-import com.example.xeva.dao.OrganizationRepository;
-import com.example.xeva.dao.RoleRepository;
-import com.example.xeva.dao.UserRepository;
-import com.example.xeva.dto.EventDTO;
+import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
-import com.example.xeva.security.JwtTokenUtil;
-import com.example.xeva.security.UserDetailsImpl;
 import com.example.xeva.service.interfaces.EventService;
+import com.example.xeva.service.interfaces.GeneratorService;
 import com.example.xeva.service.interfaces.TimeEventService;
-import com.example.xeva.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-class ObjHolder{
-
-    EventDTO eventDTO;
-    String dateS;
-    String dateE;
-
-    public EventDTO getEventDTO() {
-        return eventDTO;
-    }
-
-    public void setEventDTO(EventDTO eventDTO) {
-        this.eventDTO = eventDTO;
-    }
-
-    public String getDateS() {
-        return dateS;
-    }
-
-    public void setDateS(String dateS) {
-        this.dateS = dateS;
-    }
-
-    public String getDateE() {
-        return dateE;
-    }
-
-    public void setDateE(String dateE) {
-        this.dateE = dateE;
-    }
-}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
 public class EventController {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
 
     @Autowired
     private EventService eventService;
@@ -85,18 +33,48 @@ public class EventController {
     @Autowired
     private TimeEventService timeEventService;
 
+    @Autowired
+    private GeneratorService generatorService;
+
+
     @PostMapping(value="/createEvent")
     public ResponseEntity<?> create(@Valid @RequestBody ObjHolder objHolder){
         Event event =  eventMapper.toEvent(objHolder.getEventDTO());
         eventService.save(event);
+        System.out.println("dates"+ objHolder.getDateS()+objHolder.getDateF());
         if( !event.isCyclical() ){
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime dateStart = LocalDateTime.parse(objHolder.getDateS(), dateTimeFormatter);
-            LocalDateTime dateEnd = LocalDateTime.parse(objHolder.getDateE(), dateTimeFormatter);
-            TimeEvent te = new TimeEvent(dateStart, dateEnd, event);
-            timeEventService.save(te);
-        }
+            TimeEvent newTimeEvent = new TimeEvent(objHolder.getDateS(), objHolder.getDateF(), event);
+            timeEventService.save(newTimeEvent);
+        } else {
 
+            HashMap<LocalDateTime,LocalDateTime> listWithDates = generatorService.generatedates(objHolder.getEventDTO().getDaysOfWeek(), objHolder.getDateS(), objHolder.getDateF());
+            for (Map.Entry<LocalDateTime, LocalDateTime> entry : listWithDates.entrySet())
+            {
+                LocalDateTime startTime = entry.getKey();
+                LocalDateTime endTime = entry.getValue();
+                System.out.println(startTime);
+                System.out.println(endTime);
+                TimeEvent newTimeEvent = new TimeEvent(startTime, endTime, event);
+                timeEventService.save(newTimeEvent);
+            }
+        }
         return ResponseEntity.ok().build();
     }
+
+    //http:localhost:8080/event/fetchDay?day=2021-03-30
+    @GetMapping("/event/fetchDay")
+    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day) {
+
+        LocalDate ld = LocalDate.parse( day );
+        List<TimeEvent> listOfEvents = timeEventService.findFromDay(ld);
+        List<ResponseEventDTO> listOfResponses = new ArrayList<>();
+        for(TimeEvent timeEvent: listOfEvents){
+            listOfResponses.add(eventMapper.toResponseEvent(timeEvent));
+        }
+
+        return new ResponseEntity(listOfResponses, HttpStatus.OK);
+
+    }
+
+
 }
