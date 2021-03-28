@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 class ObjHolder {
 
     EventDTO eventDTO;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateS;

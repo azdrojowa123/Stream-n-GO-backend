@@ -14,9 +14,9 @@ public class EventDTO {
     public String webAddress;
     public String tags;
     public String language;
-    public int statusInt;
 
-    public EventDTO(String username, Organization organization, String eventName, String description, String daysOfWeek, int cyclical, String mode, String webAddress, String tags, String language, int status) {
+
+    public EventDTO(String username, Organization organization, String eventName, String description, String daysOfWeek, int cyclical, String mode, String webAddress, String tags, String language) {
         this.username = username;
         this.organization = organization;
         this.eventName = eventName;
@@ -27,7 +27,7 @@ public class EventDTO {
         this.webAddress = webAddress;
         this.tags = tags;
         this.language = language;
-        this.statusInt = status;
+
     }
 
     @Override
@@ -43,7 +43,6 @@ public class EventDTO {
                 ", webAddress='" + webAddress + '\'' +
                 ", tags='" + tags + '\'' +
                 ", language='" + language + '\'' +
-                ", status=" + statusInt +
                 '}';
     }
     public EventDTO(){}
@@ -128,12 +127,6 @@ public class EventDTO {
         this.language = language;
     }
 
-    public int getStatusInt() {
-        return statusInt;
-    }
 
-    public void setStatusInt(int statusInt) {
-        this.statusInt = statusInt;
-    }
 
 }

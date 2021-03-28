@@ -34,7 +34,7 @@ public abstract class EventMapper {
         newEvent.setWebAddress(dto.getWebAddress());
         newEvent.setTags(dto.getTags());
         newEvent.setLanguage(dto.getLanguage());
-        newEvent.setStatus(dto.getStatusInt() == 1);
+        newEvent.setStatus(false);
 
         return newEvent;
     }
