@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class ResponseEventDTO {
 
     private String organizationName;
+    private int timeEventId;
     private String eventName;
     private String tags;
     private String language;
@@ -13,13 +14,22 @@ public class ResponseEventDTO {
 
     public ResponseEventDTO(){}
 
-    public ResponseEventDTO(String organizationName, String eventName, String tags, String language, LocalDateTime dateS, LocalDateTime dateF) {
+    public ResponseEventDTO(String organizationName, int timeEventId, String eventName, String tags, String language, LocalDateTime dateS, LocalDateTime dateF) {
         this.organizationName = organizationName;
+        this.timeEventId = timeEventId;
         this.eventName = eventName;
         this.tags = tags;
         this.language = language;
         this.dateS = dateS;
         this.dateF = dateF;
+    }
+
+    public int getTimeEventId() {
+        return timeEventId;
+    }
+
+    public void setTimeEventId(int timeEventId) {
+        this.timeEventId = timeEventId;
     }
 
     public String getOrganizationName() {

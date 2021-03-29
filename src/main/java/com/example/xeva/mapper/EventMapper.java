@@ -47,6 +47,7 @@ public abstract class EventMapper {
         responseEventDTO.setLanguage(timeEvent.getEvent().getLanguage());
         responseEventDTO.setDateS(timeEvent.getStartDate());
         responseEventDTO.setDateF(timeEvent.getEndDate());
+        responseEventDTO.setTimeEventId(timeEvent.getId());
 
         return responseEventDTO;
     }

@@ -15,6 +15,7 @@
          eventName: String;
          tags: String;
          language: String;
-         dateS: LocalDateTime (w postaci yyyy-MM-dd)
+         dateS: LocalDateTime (w postaci yyyy-MM-dd);
          dateF: LocalDateTime (w postaci yyyy-MM-dd);
+         timeEventId: id;
     }
