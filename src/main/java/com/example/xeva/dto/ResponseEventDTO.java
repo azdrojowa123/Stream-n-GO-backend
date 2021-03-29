@@ -11,6 +11,7 @@ public class ResponseEventDTO {
     private String language;
     private LocalDateTime dateS;
     private LocalDateTime dateF;
+    private boolean ifSaved;
 
     public ResponseEventDTO(){}
 
@@ -22,6 +23,14 @@ public class ResponseEventDTO {
         this.language = language;
         this.dateS = dateS;
         this.dateF = dateF;
+    }
+
+    public boolean isIfSaved() {
+        return ifSaved;
+    }
+
+    public void setIfSaved(boolean ifSaved) {
+        this.ifSaved = ifSaved;
     }
 
     public int getTimeEventId() {

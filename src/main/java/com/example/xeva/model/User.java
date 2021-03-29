@@ -21,12 +21,15 @@ public class User {
     @Column(name = "pwd")
     private String pwd;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-	Set<Event> users;
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY) //powiazanie do tabeli Event
+	Set<Event> ownedEvent;
 
     @ManyToOne
     @JoinColumn(name="Role_id", nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL) // powiazanie do tabeli userEvents
+    Set<UserEvents> savedEvents;
 
     @ManyToMany
     @JoinTable(
@@ -34,7 +37,22 @@ public class User {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="time_event_id")
     )
-    Set<TimeEvent> savedEvents;
+    Set<TimeEvent> savedEventsOld;
+
+    public void removeSavedTimeEvent(TimeEvent timeEvent){
+        savedEventsOld.remove(timeEvent);
+        timeEvent.getSavedBy().remove(this);
+    }
+
+    public Set<TimeEvent> getSavedEventsOld() {
+        return savedEventsOld;
+    }
+
+
+
+    public void setSavedEventsOld(Set<TimeEvent> savedEventsOld) {
+        this.savedEventsOld = savedEventsOld;
+    }
 
     public User(String name, String email, String pwd, Role role) {
         this.name = name;
@@ -46,21 +64,23 @@ public class User {
     public User() {
     }
 
-    public Set<Event> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<Event> users) {
-        this.users = users;
-    }
-
-    public Set<TimeEvent> getSavedEvents() {
+    public Set<UserEvents> getSavedEvents() {
         return savedEvents;
     }
 
-    public void setSavedEvents(Set<TimeEvent> savedEvents) {
+    public void setSavedEvents(Set<UserEvents> savedEvents) {
         this.savedEvents = savedEvents;
     }
+
+    public Set<Event> getOwnedEvent() {
+        return ownedEvent;
+    }
+
+    public void setOwnedEvent(Set<Event> users) {
+        this.ownedEvent = users;
+    }
+
+
 
     public int getId() {
         return id;

@@ -80,10 +80,10 @@ public class UserController {
         User temp = userService.findById(1);
 
 
-        for (Iterator<TimeEvent> it = temp.getSavedEvents().iterator(); it.hasNext(); ) {
-            TimeEvent f = it.next();
-            System.out.println(f.getStartDate());
-        }
+//        for (Iterator<TimeEvent> it = temp.getSavedEvents().iterator(); it.hasNext(); ) {
+//            TimeEvent f = it.next();
+//            System.out.println(f.getStartDate());
+//        }
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

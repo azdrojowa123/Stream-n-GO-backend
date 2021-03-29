@@ -45,6 +45,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/signin").permitAll()
+                .antMatchers("/event/**").permitAll()
+                .antMatchers("/deleteSavedEvent").permitAll()
                 .antMatchers("/nothing").hasRole("admin")
                 .anyRequest().authenticated();
     }

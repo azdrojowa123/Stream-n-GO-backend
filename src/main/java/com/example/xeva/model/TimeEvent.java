@@ -26,8 +26,8 @@ public class TimeEvent {
     @JoinColumn(name="Event_id", nullable = false)
     private Event event;
 
-	@ManyToMany(mappedBy = "savedEvents")
-	Set<User> savedBy;
+	@OneToMany(mappedBy = "timeEventId")
+	Set<UserEvents> savedBy;
 	
 	public TimeEvent() {
 		
@@ -47,11 +47,11 @@ public class TimeEvent {
 		this.event = event;
 	}
 
-	public Set<User> getSavedBy() {
+	public Set<UserEvents> getSavedBy() {
 		return savedBy;
 	}
 
-	public void setSavedBy(Set<User> savedBy) {
+	public void setSavedBy(Set<UserEvents> savedBy) {
 		this.savedBy = savedBy;
 	}
 

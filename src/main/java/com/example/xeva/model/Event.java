@@ -58,8 +58,6 @@ public class Event {
 	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
 	Set<TimeEvent> timeEvents;
 
-
-	
 	public Event() {
 		
 	}

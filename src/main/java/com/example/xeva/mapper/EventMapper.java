@@ -3,15 +3,14 @@ package com.example.xeva.mapper;
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.EventDTO;
 import com.example.xeva.dto.ResponseEventDTO;
-import com.example.xeva.model.Event;
-import com.example.xeva.model.Organization;
-import com.example.xeva.model.TimeEvent;
-import com.example.xeva.model.User;
+import com.example.xeva.model.*;
 import com.example.xeva.service.interfaces.OrganizationService;
 import com.example.xeva.service.interfaces.UserService;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Iterator;
 
 @Mapper(componentModel = "spring", uses = {UserService.class, OrganizationService.class}, injectionStrategy = InjectionStrategy.FIELD)
 public abstract class EventMapper {
@@ -39,8 +38,9 @@ public abstract class EventMapper {
         return newEvent;
     }
 
-    public ResponseEventDTO toResponseEvent(TimeEvent timeEvent){
+    public ResponseEventDTO toResponseEvent(TimeEvent timeEvent, String userEmail){
         ResponseEventDTO responseEventDTO = new ResponseEventDTO();
+        User loggedUser = userService.findByEmail(userEmail);
         responseEventDTO.setOrganizationName(timeEvent.getEvent().getOrganization().getName());
         responseEventDTO.setEventName(timeEvent.getEvent().getName());
         responseEventDTO.setTags(timeEvent.getEvent().getTags());
@@ -48,6 +48,8 @@ public abstract class EventMapper {
         responseEventDTO.setDateS(timeEvent.getStartDate());
         responseEventDTO.setDateF(timeEvent.getEndDate());
         responseEventDTO.setTimeEventId(timeEvent.getId());
+        responseEventDTO.setIfSaved(checkIfEventSaved(loggedUser,timeEvent.getId()));
+
 
         return responseEventDTO;
     }
@@ -58,6 +60,18 @@ public abstract class EventMapper {
        } else {
            return org;
        }
+   }
+
+   public boolean checkIfEventSaved(User user, int timeEventId){
+       boolean exists = false;
+       Iterator<UserEvents> itr = user.getSavedEvents().iterator();
+        while(itr.hasNext()){
+            if(itr.next().getTimeEventId().getId() == timeEventId){
+                exists = true;
+                break;
+            }
+        }
+        return exists;
    }
 
 

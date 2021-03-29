@@ -9,7 +9,9 @@
    informacje dokładne co do objHolder na trello
 
 3. /event/fetchDay?day={day} -> zwraca wszystkie eventy z danego dnia w postaci ResponseEventDTO
-    day -> String w postaci yyyy-MM-dd
+    day -> String w postaci yyyy-MM-dd, jako requestParam
+    userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String.
+
     ResponseEventDTO -> {
          organizationName: String;
          eventName: String;
@@ -18,4 +20,5 @@
          dateS: LocalDateTime (w postaci yyyy-MM-dd);
          dateF: LocalDateTime (w postaci yyyy-MM-dd);
          timeEventId: id;
+         ifSaved: boolean (czy jest zapisany w zakładce z zapisanymi przez danego użytkownika czy nie)
     }
