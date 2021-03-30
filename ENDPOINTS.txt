@@ -22,3 +22,15 @@
          timeEventId: id;
          ifSaved: boolean (czy jest zapisany w zakładce z zapisanymi przez danego użytkownika czy nie)
     }
+
+4.Delete ->  /deleteSavedEvent" (@RequestBody Object), Object w postaci:
+     {
+         "userEmail": string, -> email aktualnie zalogowanego usera
+         "id": int -> id wydarzenia które ma zostać usunięte z zapisanych dla konkretnego usera
+     }
+
+5.Put ->  /saveEventForUser" (@RequestBody Object), Object w postaci:
+        {
+            "userEmail": string, -> email aktualnie zalogowanego usera
+            "id": int -> id wydarzenia które ma zostać dodane do zapisanych dla konkretnego usera
+        }

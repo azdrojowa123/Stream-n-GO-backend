@@ -26,12 +26,18 @@ public class TimeEvent {
     @JoinColumn(name="Event_id", nullable = false)
     private Event event;
 
-	@OneToMany(mappedBy = "timeEventId")
-	Set<UserEvents> savedBy;
-	
-	public TimeEvent() {
-		
+	@ManyToMany(mappedBy = "savedEvents")
+	Set<User> savedBy;
+
+	public Set<User> getSavedBy() {
+		return savedBy;
 	}
+
+	public void setSavedBy(Set<User> savedBy) {
+		this.savedBy = savedBy;
+	}
+
+	public TimeEvent() {}
 	
 	public TimeEvent(LocalDateTime startDate, LocalDateTime endDate, Event event) {
 		this.startDate = startDate;
@@ -47,13 +53,7 @@ public class TimeEvent {
 		this.event = event;
 	}
 
-	public Set<UserEvents> getSavedBy() {
-		return savedBy;
-	}
 
-	public void setSavedBy(Set<UserEvents> savedBy) {
-		this.savedBy = savedBy;
-	}
 
 	public int getId() {
 		return id;

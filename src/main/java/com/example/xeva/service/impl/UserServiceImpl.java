@@ -1,10 +1,12 @@
 package com.example.xeva.service.impl;
 
 import com.example.xeva.dao.UserRepository;
+import com.example.xeva.model.TimeEvent;
 import com.example.xeva.model.User;
 import com.example.xeva.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,4 +37,6 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+
 }

@@ -1,30 +1,28 @@
 package com.example.xeva.service.impl;
 
-import com.example.xeva.dao.UserEventsRepository;
-import com.example.xeva.model.UserEvents;
+import com.example.xeva.model.TimeEvent;
+import com.example.xeva.model.User;
 import com.example.xeva.service.interfaces.UserEventsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserEventsImpl implements UserEventsService {
 
-    @Autowired
-    UserEventsRepository userEventsRepository;
 
+    @Transactional
     @Override
-    public UserEvents findById(int id) {
-        return userEventsRepository.findById(id);
+    public void saveEventToUser(TimeEvent timeEvent, User user) {
+        user.getSavedEvents().add(timeEvent);
+        timeEvent.getSavedBy().add(user);
     }
 
-    @Override
-    public void saveEventToUser(UserEvents userEvents) {
-        userEventsRepository.save(userEvents);
-    }
 
+    @Transactional
     @Override
-    public void deleteSavedEvent(int userId, int eventId) {
-        userEventsRepository.deleteSaved(userId,eventId);
+    public void deleteEventToUser(TimeEvent timeEvent, User user) {
+        user.getSavedEvents().remove(timeEvent);
+        timeEvent.getSavedBy().remove(user);
 
     }
 }

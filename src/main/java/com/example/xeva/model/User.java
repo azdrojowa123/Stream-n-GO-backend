@@ -28,30 +28,25 @@ public class User {
     @JoinColumn(name="Role_id", nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL) // powiazanie do tabeli userEvents
-    Set<UserEvents> savedEvents;
 
-    @ManyToMany
+
+    @ManyToMany(cascade = {
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinTable(
             name="user_events",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="time_event_id")
     )
-    Set<TimeEvent> savedEventsOld;
+    Set<TimeEvent> savedEvents;
 
-    public void removeSavedTimeEvent(TimeEvent timeEvent){
-        savedEventsOld.remove(timeEvent);
-        timeEvent.getSavedBy().remove(this);
+
+    public Set<TimeEvent> getSavedEvents() {
+        return savedEvents;
     }
 
-    public Set<TimeEvent> getSavedEventsOld() {
-        return savedEventsOld;
-    }
-
-
-
-    public void setSavedEventsOld(Set<TimeEvent> savedEventsOld) {
-        this.savedEventsOld = savedEventsOld;
+    public void setSavedEvents(Set<TimeEvent> savedEvents) {
+        this.savedEvents = savedEvents;
     }
 
     public User(String name, String email, String pwd, Role role) {
@@ -64,13 +59,7 @@ public class User {
     public User() {
     }
 
-    public Set<UserEvents> getSavedEvents() {
-        return savedEvents;
-    }
 
-    public void setSavedEvents(Set<UserEvents> savedEvents) {
-        this.savedEvents = savedEvents;
-    }
 
     public Set<Event> getOwnedEvent() {
         return ownedEvent;

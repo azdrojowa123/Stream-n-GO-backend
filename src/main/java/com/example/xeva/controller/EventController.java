@@ -4,7 +4,6 @@ import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
 import com.example.xeva.service.interfaces.*;
-import org.mapstruct.control.MappingControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,13 +67,12 @@ public class EventController {
 
     //http:localhost:8080/event/fetchDay?day=2021-03-30
     @GetMapping("/event/fetchDay")
-    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day, @RequestBody String userEmail,@RequestBody String user2) {
+    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day, @RequestBody String userEmail) {
 
         LocalDate ld = LocalDate.parse( day );
         List<TimeEvent> listOfEvents = timeEventService.findFromDay(ld);
         List<ResponseEventDTO> listOfResponses = new ArrayList<>();
         System.out.println("userEmail "+userEmail);
-        System.out.println("userEmail2 "+user2);
         for(TimeEvent timeEvent: listOfEvents){
             listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
         }
@@ -85,30 +83,26 @@ public class EventController {
     @DeleteMapping("/deleteSavedEvent")
     public ResponseEntity<?> deleteSavedEvent(@RequestBody Map<String, String> json){
 
-        User user = userService.findByEmail(json.get("userEmail"));
+
         TimeEvent timeEvent = timeEventService.findById(Integer.parseInt(json.get("id")));
-//        System.out.println("ilosc zapisanych wydarzen do usera przed"+ user.getSavedEvents().size());
-//        System.out.println("ilosc zapisanych userow do wydarzenia przed"+ timeEvent.getSavedBy().size());
-//        user.removeSavedTimeEvent(timeEvent);
-//        System.out.println("ilosc zapisanych wydarzen do usera po"+ user.getSavedEvents().size());
-//        System.out.println("ilosc zapisanych userow do wydarzenia po"+ timeEvent.getSavedBy().size());
+        User user = userService.findByEmail(json.get("userEmail"));
 
-        System.out.println("liczba eventow"+user.getSavedEvents().size());
-        //System.out.println("Przez ile osob zapisany"+timeEvent.getSavedBy().size());
-       // userEventsService.deleteSavedEvent(user.getId(),4);
-//        System.out.println("liczba eventow po "+user.getSavedEvents().size());
-//        System.out.println("Przez ile osob zapisany po "+timeEvent.getSavedBy().size());
-        UserEvents userEvents = new UserEvents(user,timeEvent);
-        userEventsService.saveEventToUser(userEvents);
-         User user2 = userService.findByEmail(json.get("userEmail"));
-         //System.out.println("liczba eventow po zapisaniu"+user.getSavedEventsOld().size());
-        System.out.println("liczba eventow po zapisaniu"+user.getSavedEvents().size());
-        //System.out.println("liczba eventow po zapisaniu"+user2.getSavedEventsOld().size());
-        System.out.println("liczba eventow po zapisaniu"+user2.getSavedEvents().size());
-
+        userEventsService.deleteEventToUser(timeEvent,user);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/saveEventForUser")
+    public ResponseEntity<?> saveEventForUser(@RequestBody Map<String, String> json){
 
+
+        TimeEvent timeEvent = timeEventService.findById(Integer.parseInt(json.get("id")));
+        User user = userService.findByEmail(json.get("userEmail"));
+
+        userEventsService.saveEventToUser(timeEvent,user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    
 }

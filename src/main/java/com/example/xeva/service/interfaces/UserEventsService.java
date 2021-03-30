@@ -1,10 +1,10 @@
 package com.example.xeva.service.interfaces;
 
-import com.example.xeva.model.UserEvents;
+import com.example.xeva.model.TimeEvent;
+import com.example.xeva.model.User;
 
 public interface UserEventsService {
 
-    UserEvents findById(int id);
-    void saveEventToUser(UserEvents userEvents);
-    void deleteSavedEvent(int userId, int eventId);
+    void saveEventToUser(TimeEvent timeEvent, User user);
+    void deleteEventToUser(TimeEvent timeEvent, User user);
 }

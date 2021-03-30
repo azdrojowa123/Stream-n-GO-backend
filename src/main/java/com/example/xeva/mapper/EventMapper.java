@@ -64,9 +64,9 @@ public abstract class EventMapper {
 
    public boolean checkIfEventSaved(User user, int timeEventId){
        boolean exists = false;
-       Iterator<UserEvents> itr = user.getSavedEvents().iterator();
+       Iterator<TimeEvent> itr = user.getSavedEvents().iterator();
         while(itr.hasNext()){
-            if(itr.next().getTimeEventId().getId() == timeEventId){
+            if(itr.next().getId() == timeEventId){
                 exists = true;
                 break;
             }
