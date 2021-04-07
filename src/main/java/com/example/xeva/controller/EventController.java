@@ -104,5 +104,26 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    
+    @GetMapping("/event/fetchPast")
+    public ResponseEntity<List<ResponseEventDTO>> fetchPast(@RequestBody String userEmail) {
+
+        List<TimeEvent> listOfEvents = timeEventService.findPast();
+        List<ResponseEventDTO> listOfResponses = new ArrayList<>();
+        for(TimeEvent timeEvent: listOfEvents){
+            listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
+        }
+        return new ResponseEntity(listOfResponses, HttpStatus.OK);
+    }
+
+    @GetMapping("/event/fetchFuture")
+    public ResponseEntity<List<ResponseEventDTO>> fetchFuture(@RequestBody String userEmail) {
+
+        List<TimeEvent> listOfEvents = timeEventService.findFuture();
+        List<ResponseEventDTO> listOfResponses = new ArrayList<>();
+        for(TimeEvent timeEvent: listOfEvents){
+            listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
+        }
+        return new ResponseEntity(listOfResponses, HttpStatus.OK);
+    }
+
 }
