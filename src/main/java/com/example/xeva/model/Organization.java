@@ -48,7 +48,7 @@ public class Organization {
 	private String nip;
 	
 	@Column(name = "Phone_number")
-	private long phoneNumber;
+	private String phoneNumber;
 	
 	@NotEmpty(message = "Email cannot be empty")
 	@Column(name = "Email")
@@ -68,7 +68,7 @@ public class Organization {
 	}	
 
 	public Organization(String name, String country, String province, String city, String postalCode,
-			 String street, String nip, long phoneNumber, String email, String webPage, String photo) {
+			 String street, String nip, String phoneNumber, String email, String webPage, String photo) {
 		this.name = name;
 		this.country = country;
 		this.province = province;
@@ -146,11 +146,11 @@ public class Organization {
 		this.nip = nip;
 	}
 
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

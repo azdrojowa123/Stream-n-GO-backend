@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `XEVA`.`Organizations` (
   `Postal_code` VARCHAR(6) NOT NULL,
   `Street` VARCHAR(225) NOT NULL,
   `NIP` VARCHAR(12) NULL DEFAULT NULL,
-  `Phone_number` INT(20) NOT NULL,
+  `Phone_number` VARCHAR(30) NOT NULL,
   `Email` VARCHAR(225) NOT NULL,
   `Web_page` VARCHAR(2000) NULL DEFAULT NULL,
   `Photo` VARCHAR(2000) NULL DEFAULT NULL,
@@ -321,8 +321,8 @@ CREATE DEFINER = CURRENT_USER TRIGGER `xeva`.`users_AFTER_DELETE` AFTER DELETE O
 BEGIN
 	delete from `events` where `user_id` = old.id;
     delete from `user_events` where `User_id` = old.id;
-END
-//
+END;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
