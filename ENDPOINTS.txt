@@ -34,3 +34,10 @@
             "userEmail": string, -> email aktualnie zalogowanego usera
             "id": int -> id wydarzenia które ma zostać dodane do zapisanych dla konkretnego usera
         }
+
+6.Get -> /event/fetchPast -> zwraca wszystkie zakończone eventy (lub te trawjące, ale już rozpoczęte)
+	 w postaci ResponseEventDTO (format jak w punkcie 3)
+	 userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String.
+
+7.Get -> /event/fetchFuture -> zwraca wszystkie przyszłe eventy w postaci ResponseEventDTO (format jak w punkcie 3)
+	 userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String.
