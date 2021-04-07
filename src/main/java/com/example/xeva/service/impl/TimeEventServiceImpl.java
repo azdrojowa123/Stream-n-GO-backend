@@ -29,4 +29,12 @@ public class TimeEventServiceImpl implements TimeEventService {
     public List<TimeEvent> findFromDay(LocalDate date) {
         return timeEventRepository.findFromDay(date);
     }
+
+    @Override
+    public List<TimeEvent> findPast() { return timeEventRepository.findPast(); }
+
+    @Override
+    public List<TimeEvent> findFuture() { return  timeEventRepository.findFuture(); }
+
+
 }

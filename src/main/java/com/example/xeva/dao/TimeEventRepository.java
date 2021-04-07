@@ -18,4 +18,9 @@ public interface TimeEventRepository extends JpaRepository<TimeEvent,Integer>{
     @Query(value = "SELECT * FROM time_events u WHERE DATE(Start_date) = ?1", nativeQuery = true)
     List<TimeEvent> findFromDay(LocalDate date);
 
+    @Query(value = "SELECT * FROM time_events WHERE DATE(Start_date) <= NOW()", nativeQuery = true)
+    List<TimeEvent> findPast();
+
+    @Query(value = "SELECT * FROM time_events WHERE DATE(Start_date) > NOW()", nativeQuery = true)
+    List<TimeEvent> findFuture();
 }
