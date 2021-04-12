@@ -13,6 +13,7 @@
     userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String.
 
     ResponseEventDTO -> {
+         id: int, // id obiektu TimeEvent, ale z TimeEvent możemy wyciągnąć Event ofc
          organizationName: String;
          eventName: String;
          tags: String;

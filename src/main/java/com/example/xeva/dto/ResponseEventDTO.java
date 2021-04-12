@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class ResponseEventDTO {
 
+    private int id;
     private String organizationName;
     private int timeEventId;
     private String eventName;
@@ -15,7 +16,8 @@ public class ResponseEventDTO {
 
     public ResponseEventDTO(){}
 
-    public ResponseEventDTO(String organizationName, int timeEventId, String eventName, String tags, String language, LocalDateTime dateS, LocalDateTime dateF) {
+    public ResponseEventDTO(int id,String organizationName, int timeEventId, String eventName, String tags, String language, LocalDateTime dateS, LocalDateTime dateF) {
+        this.id = id;
         this.organizationName = organizationName;
         this.timeEventId = timeEventId;
         this.eventName = eventName;
@@ -23,6 +25,14 @@ public class ResponseEventDTO {
         this.language = language;
         this.dateS = dateS;
         this.dateF = dateF;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isIfSaved() {

@@ -41,6 +41,7 @@ public abstract class EventMapper {
     public ResponseEventDTO toResponseEvent(TimeEvent timeEvent, String userEmail){
         ResponseEventDTO responseEventDTO = new ResponseEventDTO();
         User loggedUser = userService.findByEmail(userEmail);
+        responseEventDTO.setId(timeEvent.getId());
         responseEventDTO.setOrganizationName(timeEvent.getEvent().getOrganization().getName());
         responseEventDTO.setEventName(timeEvent.getEvent().getName());
         responseEventDTO.setTags(timeEvent.getEvent().getTags());

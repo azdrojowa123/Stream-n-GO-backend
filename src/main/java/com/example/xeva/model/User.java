@@ -60,7 +60,6 @@ public class User {
     }
 
 
-
     public Set<Event> getOwnedEvent() {
         return ownedEvent;
     }
