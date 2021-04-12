@@ -40,7 +40,6 @@ public abstract class EventMapper {
 
     public ResponseEventDTO toResponseEvent(TimeEvent timeEvent, String userEmail){
         ResponseEventDTO responseEventDTO = new ResponseEventDTO();
-        User loggedUser = userService.findByEmail(userEmail);
         responseEventDTO.setId(timeEvent.getId());
         responseEventDTO.setOrganizationName(timeEvent.getEvent().getOrganization().getName());
         responseEventDTO.setEventName(timeEvent.getEvent().getName());
@@ -49,9 +48,12 @@ public abstract class EventMapper {
         responseEventDTO.setDateS(timeEvent.getStartDate());
         responseEventDTO.setDateF(timeEvent.getEndDate());
         responseEventDTO.setTimeEventId(timeEvent.getId());
-        responseEventDTO.setIfSaved(checkIfEventSaved(loggedUser,timeEvent.getId()));
-
-
+        if(userEmail.equals("empty")){
+            responseEventDTO.setIfSaved(false);
+        } else {
+            User loggedUser = userService.findByEmail(userEmail);
+            responseEventDTO.setIfSaved(checkIfEventSaved(loggedUser,timeEvent.getId()));
+        }
         return responseEventDTO;
     }
 

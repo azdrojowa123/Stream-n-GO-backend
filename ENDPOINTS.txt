@@ -10,7 +10,7 @@
 
 3. /event/fetchDay?day={day} -> zwraca wszystkie eventy z danego dnia w postaci ResponseEventDTO
     day -> String w postaci yyyy-MM-dd, jako requestParam
-    userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String.
+    userEmail -> w requestBody jako string, nazwa username. username == empty, kiedy req jest przed zalogowaniem
 
     ResponseEventDTO -> {
          id: int, // id obiektu TimeEvent, ale z TimeEvent możemy wyciągnąć Event ofc
