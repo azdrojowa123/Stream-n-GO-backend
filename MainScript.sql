@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `XEVA`.`Organizations` (
   `Postal_code` VARCHAR(6) NOT NULL,
   `Street` VARCHAR(225) NOT NULL,
   `NIP` VARCHAR(12) NULL DEFAULT NULL,
-  `Phone_number` INT(20) NOT NULL,
+  `Phone_number` VARCHAR(30) NOT NULL,
   `Email` VARCHAR(225) NOT NULL,
   `Web_page` VARCHAR(2000) NULL DEFAULT NULL,
   `Photo` VARCHAR(2000) NULL DEFAULT NULL,
@@ -219,31 +219,31 @@ INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-09-05 16:15:48','2021-09-05 16:49:05');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('10','2021-07-14 18:56:14','2021-07-14 20:13:17');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('2','2021-08-26 07:04:55','2021-08-26 22:02:54');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2020-10-28 11:46:39','2021-10-28 14:27:12');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2022-02-06 05:29:26','2021-02-06 20:09:46');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2020-10-28 11:46:39','2020-10-28 14:27:12');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2022-02-06 05:29:26','2022-02-06 20:09:46');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('5','2021-02-16 15:02:09','2021-02-16 16:08:30');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('13','2021-08-29 10:46:13','2020-08-29 22:09:57');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-05-17 03:43:29','2020-05-17 08:11:01');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2020-12-12 01:47:34','2021-12-12 04:05:51');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('13','2021-08-29 10:46:13','2021-08-29 22:09:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-05-17 03:43:29','2021-05-17 08:11:01');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2020-12-12 01:47:34','2020-12-12 04:05:51');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2020-10-16 09:43:32','2020-10-16 12:38:27');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2021-04-05 22:08:59','2020-04-05 22:43:22');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2022-02-04 08:21:38','2020-02-04 19:44:54');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2021-04-05 22:08:59','2021-04-05 22:43:22');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2022-02-04 08:21:38','2022-02-04 19:44:54');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2020-04-13 00:15:04','2020-04-13 02:01:51');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('17','2020-11-20 08:08:35','2020-11-20 23:17:17');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2021-09-13 11:08:03','2021-03-13 13:07:18');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('2','2021-11-18 14:14:54','2021-11-18 16:10:40');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2020-09-26 12:12:33','2020-09-26 16:34:13');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('8','2021-05-27 02:17:24','2020-05-27 21:51:32');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-04-03 18:04:46','2022-04-03 19:42:31');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('8','2021-05-27 02:17:24','2021-05-27 21:51:32');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-04-03 18:04:46','2020-04-03 19:42:31');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-04-28 20:48:37','2021-04-28 22:26:06');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('4','2021-10-01 01:25:17','2022-10-01 03:41:27');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('4','2021-10-01 01:25:17','2021-10-01 03:41:27');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2021-03-15 13:26:56','2021-03-15 14:13:05');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2020-08-18 12:47:38','2020-08-18 14:27:49');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2021-06-23 19:03:42','2022-06-23 20:13:18');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2021-06-23 19:03:42','2021-06-23 20:13:18');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('7','2020-04-19 12:23:12','2020-04-19 15:17:22');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2022-02-22 07:13:52','2020-02-22 08:18:57');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-03-23 09:01:33','2022-03-23 18:34:09');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2020-06-15 12:23:05','2021-06-15 18:13:41');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2022-02-22 07:13:52','2022-02-22 08:18:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-03-23 09:01:33','2020-03-23 18:34:09');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2020-06-15 12:23:05','2020-06-15 18:13:41');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2021-02-06 06:19:23','2021-02-06 10:21:22');
 
 
@@ -321,8 +321,8 @@ CREATE DEFINER = CURRENT_USER TRIGGER `xeva`.`users_AFTER_DELETE` AFTER DELETE O
 BEGIN
 	delete from `events` where `user_id` = old.id;
     delete from `user_events` where `User_id` = old.id;
-END
-//
+END;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -9,4 +9,6 @@ public interface TimeEventService {
     void save(TimeEvent timeEvent);
     TimeEvent findById(int id);
     List<TimeEvent> findFromDay(LocalDate day);
+    List<TimeEvent> findPast();
+    List<TimeEvent> findFuture();
 }
