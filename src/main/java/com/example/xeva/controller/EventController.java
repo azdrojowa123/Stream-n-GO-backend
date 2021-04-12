@@ -110,7 +110,10 @@ public class EventController {
         List<TimeEvent> listOfEvents = timeEventService.findPast();
         List<ResponseEventDTO> listOfResponses = new ArrayList<>();
         for(TimeEvent timeEvent: listOfEvents){
-            listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
+            ResponseEventDTO response = eventMapper.toResponseEvent(timeEvent, userEmail);
+            if(response.isIfSaved()){
+                listOfResponses.add(response);
+            }
         }
         return new ResponseEntity(listOfResponses, HttpStatus.OK);
     }
@@ -121,7 +124,10 @@ public class EventController {
         List<TimeEvent> listOfEvents = timeEventService.findFuture();
         List<ResponseEventDTO> listOfResponses = new ArrayList<>();
         for(TimeEvent timeEvent: listOfEvents){
-            listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
+            ResponseEventDTO response = eventMapper.toResponseEvent(timeEvent, userEmail);
+            if(response.isIfSaved()){
+                listOfResponses.add(response);
+            }
         }
         return new ResponseEntity(listOfResponses, HttpStatus.OK);
     }
