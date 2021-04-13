@@ -44,8 +44,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(new FailAuthenticationEntryPoint()).and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/signin").permitAll()
                 .antMatchers("/event/**").permitAll()
+                .antMatchers("/notLogged/**").permitAll()
                 .antMatchers("/nothing").hasRole("admin")
                 .anyRequest().authenticated();
     }

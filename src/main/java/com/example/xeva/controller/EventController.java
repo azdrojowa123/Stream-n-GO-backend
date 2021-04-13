@@ -1,5 +1,6 @@
 package com.example.xeva.controller;
 
+import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
@@ -77,6 +78,8 @@ public class EventController {
             listOfResponses.add(eventMapper.toResponseEvent(timeEvent, userEmail));
         }
 
+        System.out.println(generatorService.getOnlyDate(listOfEvents.get(0).getEndDate()));
+
         return new ResponseEntity(listOfResponses, HttpStatus.OK);
     }
 
@@ -130,6 +133,23 @@ public class EventController {
             }
         }
         return new ResponseEntity(listOfResponses, HttpStatus.OK);
+    }
+
+    //for logged users
+    @GetMapping("/fetchEvent/{id}")
+    public ResponseEntity<ResponseEventSpecificationDTO> fetchEventSpecificationLogged(@PathVariable(value = "id") int id){
+        TimeEvent timeEvent = timeEventService.findById(id);
+
+        return  new ResponseEntity(eventMapper.toResponseEventSpecification(timeEvent), HttpStatus.OK);
+
+    }
+    @GetMapping("/notLogged/fetchEvent/{id}")
+    public ResponseEntity<ResponseEventSpecificationDTO> fetchEventSpecification(@PathVariable(value = "id") int id){
+        TimeEvent timeEvent = timeEventService.findById(id);
+        ResponseEventSpecificationDTO response = eventMapper.toResponseEventSpecification(timeEvent);
+        response.setWebAddress("");
+        return  new ResponseEntity(response, HttpStatus.OK);
+
     }
 
 }

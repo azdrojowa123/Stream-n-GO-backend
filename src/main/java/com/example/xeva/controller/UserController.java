@@ -68,7 +68,7 @@ public class UserController {
     @Autowired
     private TimeEventRepository timeEventRepository;
 
-    @PostMapping(value="/signin")
+    @PostMapping(value="/notLogged/signin")
     public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {
        try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUsername(),req.getPassword()));
@@ -79,11 +79,6 @@ public class UserController {
         String token = jwtTokenUtil.generateToken(userDetails);
         User temp = userService.findById(1);
 
-
-//        for (Iterator<TimeEvent> it = temp.getSavedEvents().iterator(); it.hasNext(); ) {
-//            TimeEvent f = it.next();
-//            System.out.println(f.getStartDate());
-//        }
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

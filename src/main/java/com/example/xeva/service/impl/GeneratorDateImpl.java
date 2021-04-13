@@ -3,8 +3,13 @@ package com.example.xeva.service.impl;
 import com.example.xeva.service.interfaces.GeneratorService;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,6 +48,19 @@ public class GeneratorDateImpl implements GeneratorService {
         }
 
         return result;
+    }
+
+    @Override
+    public String getOnlyDate(LocalDateTime event) {
+
+        return event.toLocalDate().toString();
+    }
+
+    @Override
+    public String getOnlyTime(LocalDateTime event) {
+
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("HH:mm");
+        return event.toLocalTime().format(pattern);
     }
 
     public static long generateMinuteDuration(LocalDateTime start, LocalDateTime finish) {

@@ -80,7 +80,6 @@ public class Event {
 		return status;
 	}
 
-
 	public boolean getStatus() {
 		return status;
 	}

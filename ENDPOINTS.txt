@@ -42,3 +42,26 @@
 
 7.Get -> /event/fetchFuture -> zwraca wszystkie przyszłe eventy danego użytkownika w postaci ResponseEventDTO (format jak w punkcie 3)
 	 userEmail -> w requestBody jako string, nazwa username. Bez tworzenia obiektu, tylko sam String. Identyfikuje użykownika.
+
+8. Get -> /fetchEvent/{id} -> zwraca szczegóły danego wydarzenia, id to id obiektu TimeEvent.
+    W odpowiedzi dostajemy obiekt w postaci:
+    {
+        "name": string,
+        "description": string,
+        "daysOfWeek": string w postaci -> "mo,fr"
+        "cyclical": boolean,
+        "mode": string,
+        "webAddress": string,
+        "tags": string,
+        "language": string,
+        "dateS":  string -> sama data "2021-04-12",
+        "dateF":  string -> sam data "2021-04-12",
+        "timeS": string ->  sam czas
+        "timeF": string ->  sam czas "18:00",
+        "orgName": string,
+        "orgLogo": string,
+        "orgEmail": string,
+        "orgWeb": string
+    }
+
+9. /notLogged/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
