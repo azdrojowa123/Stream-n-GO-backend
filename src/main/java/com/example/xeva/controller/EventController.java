@@ -68,7 +68,7 @@ public class EventController {
 
     //http:localhost:8080/event/fetchDay?day=2021-03-30
     @GetMapping("/event/fetchDay")
-    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day, @RequestBody String userEmail) {
+    public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day, @RequestHeader("From") String userEmail) {
 
         LocalDate ld = LocalDate.parse( day );
         List<TimeEvent> listOfEvents = timeEventService.findFromDay(ld);
