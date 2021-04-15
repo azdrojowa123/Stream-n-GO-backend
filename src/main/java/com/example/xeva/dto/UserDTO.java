@@ -7,13 +7,13 @@ public class UserDTO {
     public String name;
     public String email;
     public String pwd;
-    public Role role;
+    public String roleName;
 
-    public UserDTO(String name, String email, String pwd, Role role) {
+    public UserDTO(String name, String email, String pwd, String roleName) {
         this.name = name;
         this.email = email;
         this.pwd = pwd;
-        this.role = role;
+        this.roleName = roleName;
     }
 
     public UserDTO() {
@@ -43,12 +43,12 @@ public class UserDTO {
         this.pwd = pwd;
     }
 
-    public Role getRole() {
-        return role;
+    public String getRole() {
+        return roleName;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.roleName = role;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class UserDTO {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", pwd='" + pwd + '\'' +
-                ", role=" + role +
+                ", roleName=" + roleName +
                 '}';
     }
 }
