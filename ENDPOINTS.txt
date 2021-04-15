@@ -83,10 +83,15 @@
 
     Zwraca organizacje w postaci:
     ResponseOrgDTO -> {
-             id: int,
-             name: String,
-             photo: String,
-             city: String,
-             province: String,
-             country: String
+             "name": String,
+    	     "country": String,
+    	     "province": String,
+             "city": String,
+             "postalCode": String,
+             "street": String,
+             "nip": String,
+             "phoneNumber": String,
+             "email": String,
+             "webPage": String,
+             "photo": String
         }

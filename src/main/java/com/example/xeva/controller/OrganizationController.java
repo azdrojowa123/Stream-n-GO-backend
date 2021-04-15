@@ -1,7 +1,6 @@
 package com.example.xeva.controller;
 
-import com.example.xeva.dto.ResponseEventSpecificationDTO;
-import com.example.xeva.dto.ResponseOrgDTO;
+import com.example.xeva.dto.FullOrgResponseDTO;
 import com.example.xeva.mapper.OrganizationMapper;
 import com.example.xeva.model.Organization;
 import com.example.xeva.service.interfaces.OrganizationService;
@@ -21,9 +20,9 @@ public class OrganizationController {
     private OrganizationMapper organizationMapper;
 
     @GetMapping("/fetchOrganization")
-    public ResponseEntity<ResponseOrgDTO> fetchOrganization(@RequestParam int id){
+    public ResponseEntity<FullOrgResponseDTO> fetchOrganization(@RequestParam int id){
         Organization org = organizationService.findById(id);
-        ResponseOrgDTO response = organizationMapper.toResponseOrganization(org);
+        FullOrgResponseDTO response = organizationMapper.toFullOrgResponseDTO(org);
 
         return  new ResponseEntity(response, HttpStatus.OK);
     }
