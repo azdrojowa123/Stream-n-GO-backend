@@ -99,10 +99,6 @@ public class UserController {
             throw new Exception(("Email already in use"));
         }
 
-        if(userService.findByEmail(userDTO.getEmail()) != null){
-            throw new Exception(("Email already in use"));
-        }
-
         User user = userMapper.toUser(userDTO);
         user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
 
