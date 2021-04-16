@@ -2,21 +2,19 @@ package com.example.xeva.dto;
 
 import com.example.xeva.model.Role;
 
-public class UserDTO {
+public class NewUserDTO {
 
     public String name;
     public String email;
     public String pwd;
-    public String roleName;
 
-    public UserDTO(String name, String email, String pwd, String roleName) {
+    public NewUserDTO(String name, String email, String pwd, String roleName) {
         this.name = name;
         this.email = email;
         this.pwd = pwd;
-        this.roleName = roleName;
     }
 
-    public UserDTO() {
+    public NewUserDTO() {
     }
 
     public String getName() {
@@ -43,21 +41,12 @@ public class UserDTO {
         this.pwd = pwd;
     }
 
-    public String getRole() {
-        return roleName;
-    }
-
-    public void setRole(String role) {
-        this.roleName = role;
-    }
-
     @Override
     public String toString() {
         return "UserDTO{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", pwd='" + pwd + '\'' +
-                ", roleName=" + roleName +
                 '}';
     }
 }

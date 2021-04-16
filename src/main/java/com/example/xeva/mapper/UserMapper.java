@@ -1,7 +1,7 @@
 package com.example.xeva.mapper;
 
 import com.example.xeva.dto.EventDTO;
-import com.example.xeva.dto.UserDTO;
+import com.example.xeva.dto.NewUserDTO;
 import com.example.xeva.model.Event;
 import com.example.xeva.model.Organization;
 import com.example.xeva.model.Role;
@@ -18,9 +18,9 @@ public abstract class UserMapper {
     @Autowired
     RoleService roleService;
 
-    public User toUser(UserDTO dto){
+    public User toNewUser(NewUserDTO dto){
         User newUser = new User();
-        Role role = roleService.findByRoleName(dto.getRole());
+        Role role = roleService.findByRoleName("User");
         newUser.setName(dto.getName());
         newUser.setEmail(dto.getEmail());
         newUser.setPwd(dto.getPwd());

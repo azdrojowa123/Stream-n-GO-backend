@@ -4,7 +4,7 @@ import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dao.TimeEventRepository;
 import com.example.xeva.dao.UserRepository;
-import com.example.xeva.dto.UserDTO;
+import com.example.xeva.dto.NewUserDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.mapper.UserMapper;
 import com.example.xeva.model.JwtRequest;
@@ -94,12 +94,12 @@ public class UserController {
     }
 
     @PostMapping(value="/notLogged/register")
-    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) throws Exception{
+    public ResponseEntity<?> register(@RequestBody NewUserDTO userDTO) throws Exception{
         if(userService.findByEmail(userDTO.getEmail()) != null){
             throw new Exception(("Email already in use"));
         }
 
-        User user = userMapper.toUser(userDTO);
+        User user = userMapper.toNewUser(userDTO);
         user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
 
         userService.save(user);
