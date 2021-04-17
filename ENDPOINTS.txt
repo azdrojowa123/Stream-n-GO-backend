@@ -65,3 +65,33 @@
     }
 
 9. /notLogged/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
+
+10. /notLogged/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+
+    Przyjmuje UserDTO w postaci:
+
+    {
+        "name":String,
+        "email":String,
+        "pwd":String,
+        "roleName": String -> Role na ten moment: User, Organizer, Admin, GlobalAdmin
+    }
+
+11. /fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
+    Pzyjmuje:
+                id -> int w postaci requestParam.
+
+    Zwraca organizacje w postaci:
+    ResponseOrgDTO -> {
+             "name": String,
+    	     "country": String,
+    	     "province": String,
+             "city": String,
+             "postalCode": String,
+             "street": String,
+             "nip": String,
+             "phoneNumber": String,
+             "email": String,
+             "webPage": String,
+             "photo": String
+        }
