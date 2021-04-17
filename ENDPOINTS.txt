@@ -1,4 +1,4 @@
-1. /signin(@RequestBody JwtRequest) -> return JWT token after successful login or return 401/500 error.
+1. /notLogged/signin(@RequestBody JwtRequest) -> return JWT token after successful login or return 401/500 error.
     500 error (BAD REQUEST) gone with JSON object:
     {
         field_name: what was invalid in this field,
@@ -77,12 +77,12 @@
         "roleName": String -> Role na ten moment: User, Organizer, Admin, GlobalAdmin
     }
 
-11. /fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
+11. /notLogged/fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
     Pzyjmuje:
                 id -> int w postaci requestParam.
 
     Zwraca organizacje w postaci:
-    ResponseOrgDTO -> {
+    FullOrgResponseDTO -> {
              "name": String,
     	     "country": String,
     	     "province": String,
@@ -95,3 +95,18 @@
              "webPage": String,
              "photo": String
         }
+12. /notLogged/table/fetchOrganizations -> zwraca informacje do tabelki z organizacjami
+
+    ResponseOrgDTO {
+
+            {
+            "id": int
+            "name": String,
+            "photo": String,
+            "city": String,
+            "province": String
+            "country": "String
+
+    }
+
+

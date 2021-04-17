@@ -125,7 +125,7 @@ public abstract class EventMapper {
        return String.join(",", newList);
     }
 
-   public  Organization checkIfOrgExsist(Organization org){
+   public Organization checkIfOrgExsist(Organization org){
        if(organizationService.findByName(org.getName()) != null){
            return organizationService.findByName(org.getName());
        } else {

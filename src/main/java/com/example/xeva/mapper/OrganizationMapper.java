@@ -1,6 +1,7 @@
 package com.example.xeva.mapper;
 
 import com.example.xeva.dto.FullOrgResponseDTO;
+import com.example.xeva.dto.ResponseOrgDTO;
 import com.example.xeva.model.Organization;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -21,6 +22,18 @@ public class OrganizationMapper {
          response.setEmail(organization.getEmail());
          response.setWebPage(organization.getWebPage());
          response.setPhoto(organization.getPhoto());
+
+         return response;
+     }
+
+     public ResponseOrgDTO responseOrgDTO(Organization organization){
+         ResponseOrgDTO response = new ResponseOrgDTO();
+         response.setId(organization.getId());
+         response.setCity(organization.getCity());
+         response.setCountry(organization.getCountry());
+         response.setName(organization.getName());
+         response.setPhoto(organization.getPhoto());
+         response.setProvince(organization.getProvince());
 
          return response;
      }

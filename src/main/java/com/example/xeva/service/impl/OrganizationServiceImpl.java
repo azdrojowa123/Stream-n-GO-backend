@@ -6,6 +6,8 @@ import com.example.xeva.service.interfaces.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
@@ -20,5 +22,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Organization findByName(String name) {
         return organizationRepository.findByName(name);
+    }
+
+    @Override
+    public List<Organization> findAll() {
+        return organizationRepository.findAll();
     }
 }
