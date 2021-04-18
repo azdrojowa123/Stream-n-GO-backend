@@ -1,3 +1,5 @@
+SWAGGER: /swagger-ui.html
+
 1. /notLogged/signin(@RequestBody JwtRequest) -> return JWT token after successful login or return 401/500 error.
     500 error (BAD REQUEST) gone with JSON object:
     {

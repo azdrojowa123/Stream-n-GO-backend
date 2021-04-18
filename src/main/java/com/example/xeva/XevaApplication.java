@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import java.util.Collections;
 @SpringBootApplication(scanBasePackages = { "com.example.xeva" })
 @EnableJpaRepositories
 @EnableWebSecurity(debug = true)
+@EnableSwagger2
 public class XevaApplication {
 
 	public static void main(String[] args) {
