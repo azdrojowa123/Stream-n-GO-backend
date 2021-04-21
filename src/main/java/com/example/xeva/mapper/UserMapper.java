@@ -22,6 +22,7 @@ public abstract class UserMapper {
         User newUser = new User();
         Role role = roleService.findByRoleName("User");
         newUser.setName(dto.getName());
+        newUser.setSurname(dto.getSurname());
         newUser.setEmail(dto.getEmail());
         newUser.setPwd(dto.getPwd());
         newUser.setRole(role);
