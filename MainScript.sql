@@ -42,11 +42,11 @@ CREATE TABLE IF NOT EXISTS `XEVA`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Role_id` INT NOT NULL,
   `Name` VARCHAR(225) NOT NULL,
+  `Surname` varchar(225) NOT NULL,
   `Email` VARCHAR(225) NOT NULL,
   `Pwd` VARCHAR(225) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fkRole_id_idx` (`Role_id` ASC) VISIBLE,
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE,
   UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) VISIBLE,
   CONSTRAINT `fkRole_id`
     FOREIGN KEY (`Role_id`)
@@ -174,17 +174,17 @@ ENGINE = InnoDB;
 
 INSERT INTO `Roles`(`Role_name`) VALUES ('User'), ('Organizer'), ('Admin'), ('GlobalAdmin');
 
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('1','Cody Conway','nisi.nibh.lacinia@Aliquamauctor.ca','$2y$12$fu6z3Rh2L6w9kPj40x0.s.prXfFPQ/34/G7YuTO2MRxnUQaTjqvGa');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('3','Louis Hopper','diam@sed.org','$2y$12$CUdxYgEN46xEUEIonbHgYeqsAuVXAAOBwFOZzmkxgBJiRjQX9VJVG');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('2','Kennan Monroe','ipsum.sodales.purus@Ut.ca','$2y$12$xdYD10kyM4ts/mBe7rvI.u7vqcGxCuPnqKuksN.KLyxcxTbLEiwlK');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('2','Jordan Anthony','non.sollicitudin.a@blandit.org','$2y$12$nOUhTnKe7UF0uohc3EMFKeGDf9Z.N.eJx7KUDCn4WMnODADZiLO5.');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('4','Finn Walls','fringilla.purus.mauris@musProin.org','$2y$12$ij1zSTgndCaqiPFjI2MjRewX5aQz3y.3fiMw8yl6jk05n2bLANIry');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('1','Janusz Nosal','facilisis@parturientmontesnascetur.org','$2y$12$OexToj9LxBjQckeJRRzWrOcyF4uhZHTHCK1RuO1mTunB3NEtb5y8m');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('2','Eric Vaughn','tellus.imperdiet@consectetueradipiscing.org','$2y$12$Sn2C4wYcWPG3G6XfAApUsu6qni8jKx2n7h/1Ed3k/kQpaSkz.an3m');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('1','Cooper Todd','eleifend.vitae.erat@parturientmontes.com','$2y$12$PKe22VJ7fYN/dByrBnU7Beom9fs0h.CC/mAqNxXAvQUWLQLe.t.AW');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('1','Slade Glover','venenatis.vel@ipsumcursusvestibulum.org','$2y$12$TMuaNWEu0POiHYuJtkqJmu036M5pxnM8H9aopMyYMoeHMP3zeceHC');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('3','Theodore Pierce','erat.nonummy.ultricies@erat.org','$2y$12$0nJQJJP7bhAv/ejqmUn4Xu4P3fwzfrAX0HbSfV9n1UEjn8brgLsBa');
-INSERT INTO `Users` (`Role_id`,`Name`,`Email`,`Pwd`) VALUES ('1','user','user@user','$2y$12$INH3m9SdGkfOdtRhoIIyuuV5KUy3Wsg9FuYOHGwIB2G1JMxt6lkb6');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('1','Cody', 'Conway','nisi.nibh.lacinia@Aliquamauctor.ca','$2y$12$fu6z3Rh2L6w9kPj40x0.s.prXfFPQ/34/G7YuTO2MRxnUQaTjqvGa');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('3','Louis', 'Hopper','diam@sed.org','$2y$12$CUdxYgEN46xEUEIonbHgYeqsAuVXAAOBwFOZzmkxgBJiRjQX9VJVG');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('2','Kennan', 'Monroe','ipsum.sodales.purus@Ut.ca','$2y$12$xdYD10kyM4ts/mBe7rvI.u7vqcGxCuPnqKuksN.KLyxcxTbLEiwlK');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('2','Jordan', 'Anthony','non.sollicitudin.a@blandit.org','$2y$12$nOUhTnKe7UF0uohc3EMFKeGDf9Z.N.eJx7KUDCn4WMnODADZiLO5.');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('4','Finn', 'Walls','fringilla.purus.mauris@musProin.org','$2y$12$ij1zSTgndCaqiPFjI2MjRewX5aQz3y.3fiMw8yl6jk05n2bLANIry');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('1','Janusz', 'Nosal','facilisis@parturientmontesnascetur.org','$2y$12$OexToj9LxBjQckeJRRzWrOcyF4uhZHTHCK1RuO1mTunB3NEtb5y8m');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('2','Eric', 'Vaughn','tellus.imperdiet@consectetueradipiscing.org','$2y$12$Sn2C4wYcWPG3G6XfAApUsu6qni8jKx2n7h/1Ed3k/kQpaSkz.an3m');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('1','Cooper', 'Todd','eleifend.vitae.erat@parturientmontes.com','$2y$12$PKe22VJ7fYN/dByrBnU7Beom9fs0h.CC/mAqNxXAvQUWLQLe.t.AW');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('1','Slade', 'Glover','venenatis.vel@ipsumcursusvestibulum.org','$2y$12$TMuaNWEu0POiHYuJtkqJmu036M5pxnM8H9aopMyYMoeHMP3zeceHC');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('3','Theodore', 'Pierce','erat.nonummy.ultricies@erat.org','$2y$12$0nJQJJP7bhAv/ejqmUn4Xu4P3fwzfrAX0HbSfV9n1UEjn8brgLsBa');
+INSERT INTO `Users` (`Role_id`,`Name`,`Surname`,`Email`,`Pwd`) VALUES ('1','user', 'user','user@user','$2y$12$INH3m9SdGkfOdtRhoIIyuuV5KUy3Wsg9FuYOHGwIB2G1JMxt6lkb6');
 
 INSERT INTO `Organizations` (`Name`,`Country`,`Province`,`City`,`Postal_code`,`Street`,`NIP`,`Phone_number`,`Email`,`Web_page`,`Photo`) VALUES ('Politechnika Wrocławska','Polska','Dolnośląskie','Wrocław','S8Q8E3','Ap #510-9997 Eleifend Avenue','80756136504','109478284','eleifend.vitae@etlibero.ca','tempus mauris','at');
 INSERT INTO `Organizations` (`Name`,`Country`,`Province`,`City`,`Postal_code`,`Street`,`NIP`,`Phone_number`,`Email`,`Web_page`,`Photo`) VALUES ('Legnicka specjalna strefa ekonomiczna','Polska','Westmorland','Spartanburg','T8R1G0','630 Arcu Street','81449321615','923723436','est.ac.mattis@Quisqueornare.org','mollis. Phasellus','penatibus et magnis');
