@@ -73,7 +73,9 @@ SWAGGER: /swagger-ui.html
 
 9. /public/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
 
+
 10. /public/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+
 
     Przyjmuje UserDTO w postaci:
 
