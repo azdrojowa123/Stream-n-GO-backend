@@ -15,6 +15,9 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "surname")
+    private String surname;
+
     @Column(name = "email")
     private String email;
 
@@ -49,8 +52,9 @@ public class User {
         this.savedEvents = savedEvents;
     }
 
-    public User(String name, String email, String pwd, Role role) {
+    public User(String name, String surname, String email, String pwd, Role role) {
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.pwd = pwd;
         this.role = role;
@@ -68,8 +72,6 @@ public class User {
         this.ownedEvent = users;
     }
 
-
-
     public int getId() {
         return id;
     }
@@ -84,6 +86,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {

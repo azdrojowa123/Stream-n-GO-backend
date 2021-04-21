@@ -68,15 +68,14 @@ SWAGGER: /swagger-ui.html
 
 9. /notLogged/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
 
-10. /notLogged/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+10. /notLogged/register(@RequestBody NewUserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
 
-    Przyjmuje UserDTO w postaci:
-
+    Przyjmuje NewUserDTO w postaci:
     {
         "name":String,
+        "surname":String,
         "email":String,
         "pwd":String,
-        "roleName": String -> Role na ten moment: User, Organizer, Admin, GlobalAdmin
     }
 
 11. /notLogged/fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
@@ -110,5 +109,4 @@ SWAGGER: /swagger-ui.html
             "country": "String
 
     }
-
 
