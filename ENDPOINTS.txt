@@ -1,11 +1,16 @@
 SWAGGER: /swagger-ui.html
 
-1. /notLogged/signin(@RequestBody JwtRequest) -> return JWT token after successful login or return 401/500 error.
+1. /public/signin(@RequestBody JwtRequest) -> return Login ResponseDTO
     500 error (BAD REQUEST) gone with JSON object:
     {
         field_name: what was invalid in this field,
         ....
     }
+    {
+        "token": string
+        "role": string
+    }
+
 
 2. /createEvent(@RequestBody ObjHolder objHolder) -> returns response 200 after succesfull event insert.
    informacje dokładne co do objHolder na trello
@@ -66,9 +71,13 @@ SWAGGER: /swagger-ui.html
         "orgWeb": string
     }
 
-9. /notLogged/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
+9. /public/fetchEvent/{id} - > zwraca to samo co w punkcie 8, ale z miejscu webAddress jest pusty string. Req nie zabezpieczony.
 
-10. /notLogged/register(@RequestBody NewUserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+
+
+10. /public/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+
+    Przyjmuje UserDTO w postaci:
 
     Przyjmuje NewUserDTO w postaci:
     {
@@ -78,7 +87,7 @@ SWAGGER: /swagger-ui.html
         "pwd":String,
     }
 
-11. /notLogged/fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
+11. /public/fetchOrganization?id={id} -> zwraca informacje o organizacji pod danym id.
     Pzyjmuje:
                 id -> int w postaci requestParam.
 
@@ -96,7 +105,7 @@ SWAGGER: /swagger-ui.html
              "webPage": String,
              "photo": String
         }
-12. /notLogged/table/fetchOrganizations -> zwraca informacje do tabelki z organizacjami
+12. /public/table/fetchOrganizations -> zwraca informacje do tabelki z organizacjami
 
     ResponseOrgDTO {
 

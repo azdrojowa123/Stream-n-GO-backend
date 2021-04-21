@@ -67,7 +67,7 @@ public class EventController {
     }
 
     //http:localhost:8080/event/fetchDay?day=2021-03-30
-    @GetMapping("/notLogged/event/fetchDay")
+    @GetMapping("/public/event/fetchDay")
     public ResponseEntity<List<ResponseEventDTO>> create(@RequestParam String day, @RequestHeader("From") String userEmail) {
 
         LocalDate ld = LocalDate.parse( day );
@@ -141,7 +141,7 @@ public class EventController {
         return  new ResponseEntity(eventMapper.toResponseEventSpecification(timeEvent), HttpStatus.OK);
 
     }
-    @GetMapping("/notLogged/fetchEvent/{id}")
+    @GetMapping("/public/fetchEvent/{id}")
     public ResponseEntity<ResponseEventSpecificationDTO> fetchEventSpecification(@PathVariable(value = "id") int id){
         TimeEvent timeEvent = timeEventService.findById(id);
         ResponseEventSpecificationDTO response = eventMapper.toResponseEventSpecification(timeEvent);

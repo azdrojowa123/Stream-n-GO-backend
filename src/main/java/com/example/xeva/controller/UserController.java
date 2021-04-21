@@ -4,6 +4,7 @@ import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dao.TimeEventRepository;
 import com.example.xeva.dao.UserRepository;
+import com.example.xeva.dto.LoginResponseDTO;
 import com.example.xeva.dto.NewUserDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.mapper.UserMapper;
@@ -23,6 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +35,8 @@ import javax.validation.Valid;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -78,8 +84,8 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping(value="/notLogged/signin")
-    public ResponseEntity<?> login(@Valid @RequestBody JwtRequest req) throws Exception {
+    @PostMapping(value="/public/signin")
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody JwtRequest req) throws Exception {
        try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUsername(),req.getPassword()));
         }catch (Exception e) {
@@ -87,13 +93,14 @@ public class UserController {
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
-        User temp = userService.findById(1);
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(token);
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO(token,userDetails.getAuthorities().toArray()[0].toString());
+
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponseDTO);
     }
 
-    @PostMapping(value="/notLogged/register")
+    @PostMapping(value="/public/register")
     public ResponseEntity<?> register(@RequestBody NewUserDTO userDTO) throws Exception{
         if(userService.findByEmail(userDTO.getEmail()) != null){
             throw new Exception(("Email already in use"));
@@ -107,10 +114,5 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value="/nothing") //only for tests
-    public ResponseEntity<?> not(){
-
-        return ResponseEntity.ok("ok");
-    }
 
 }
