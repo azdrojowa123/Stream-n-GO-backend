@@ -23,7 +23,7 @@ public class OrganizationController {
     @Autowired
     private OrganizationMapper organizationMapper;
 
-    @GetMapping("/notLogged/fetchOrganization")
+    @GetMapping("/public/fetchOrganization")
     public ResponseEntity<FullOrgResponseDTO> fetchOrganization(@RequestParam int id){
         Organization org = organizationService.findById(id);
         FullOrgResponseDTO response = organizationMapper.toFullOrgResponseDTO(org);
@@ -31,7 +31,7 @@ public class OrganizationController {
         return  new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @GetMapping("/notLogged/table/fetchOrganizations")
+    @GetMapping("/public/table/fetchOrganizations")
     public ResponseEntity<List<ResponseOrgDTO>> fetchtableDataOrganizations(){
         List<Organization> organizations = organizationService.findAll();
         List<ResponseOrgDTO> newResponseList = new ArrayList<>();
