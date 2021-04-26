@@ -66,7 +66,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(AUTH_SWAGGER_LIST).permitAll()
-                .antMatchers("/admin/**").access("hasAuthority('Admin')")
+                .antMatchers("/admin/**").access("hasAnyAuthority('Admin', 'GlobalAdmin')")
                 .antMatchers("/public/**").permitAll()
                 .anyRequest().authenticated();
     }
