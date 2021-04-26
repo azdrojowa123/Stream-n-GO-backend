@@ -6,6 +6,7 @@ import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
 import com.example.xeva.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -147,6 +148,19 @@ public class EventController {
         ResponseEventSpecificationDTO response = eventMapper.toResponseEventSpecification(timeEvent);
         response.setWebAddress("");
         return  new ResponseEntity(response, HttpStatus.OK);
+
+    }
+    @GetMapping("/admin/fetchAllEvent")
+    public ResponseEntity<String> fetchEventAdminPanel(){
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Range",
+                "events 0-20/20");
+
+
+
+        return new ResponseEntity("positiv", responseHeaders,  HttpStatus.OK);
+
 
     }
 
