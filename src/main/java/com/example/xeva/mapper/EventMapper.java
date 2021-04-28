@@ -2,6 +2,7 @@ package com.example.xeva.mapper;
 
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.EventDTO;
+import com.example.xeva.dto.ResponseEventAdminDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.model.*;
@@ -94,30 +95,31 @@ public abstract class EventMapper {
         return response;
     }
 
-//    public ResponseEventSpecificationDTO toResponseEventSpecificationAdmin(Event event){
-//
-//        ResponseEventSpecificationDTO response = new ResponseEventSpecificationDTO();
-//        Organization organization = event.getOrganization();
-//        response.setCyclical(event.isCyclical());
-//        response.setDateS(generatorService.getOnlyDate(eve));
-//        response.setTimeS(generatorService.getOnlyTime(timeEvent.getStartDate()));
-//        response.setDateF(generatorService.getOnlyDate(timeEvent.getEndDate()));
-//        response.setTimeF(generatorService.getOnlyTime(timeEvent.getEndDate()));
-//        response.setLanguage(timeEvent.getEvent().getLanguage());
-//        response.setDescription(timeEvent.getEvent().getDescription());
-//        response.setOrgEmail(organization.getEmail());
-//        response.setOrgLogo(organization.getPhoto());
-//        response.setOrgName(organization.getName());
-//        response.setOrgWeb(organization.getWebPage());
-//        response.setTags(timeEvent.getEvent().getTags());
-//        response.setMode(timeEvent.getEvent().getMode());
-//        response.setDaysOfWeek(daysOfWeekFormat(timeEvent.getEvent().getDaysOfWeek()));
-//        response.setName(timeEvent.getEvent().getName());
-//        response.setWebAddress(timeEvent.getEvent().getWebAddress());
-//
-//
-//        return response;
-//    }
+    public ResponseEventAdminDTO toResponseEventAdmin(Event event){
+
+        ResponseEventAdminDTO response = new ResponseEventAdminDTO();
+        Organization organization = event.getOrganization();
+        response.setEventId(event.getId());
+        response.setCyclical(event.isCyclical());
+        response.setDateS(generatorService.getOnlyDate(event.getStartDate()));
+        response.setTimeS(generatorService.getOnlyTime(event.getStartDate()));
+        response.setDateF(generatorService.getOnlyDate(event.getEndDate()));
+        response.setTimeF(generatorService.getOnlyTime(event.getEndDate()));
+        response.setLanguage(event.getLanguage());
+        response.setDescription(event.getDescription());
+        response.setOrgEmail(organization.getEmail());
+        response.setOrgLogo(organization.getPhoto());
+        response.setOrgName(organization.getName());
+        response.setOrgWeb(organization.getWebPage());
+        response.setTags(event.getTags());
+        response.setMode(event.getMode());
+        response.setDaysOfWeek(daysOfWeekFormat(event.getDaysOfWeek()));
+        response.setName(event.getName());
+        response.setWebAddress(event.getWebAddress());
+
+
+        return response;
+    }
 
     public String daysOfWeekFormat(String daysOfWeek){
         List<String> newList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.example.xeva.controller;
 
+import com.example.xeva.dto.ResponseEventAdminDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
@@ -153,9 +154,9 @@ public class EventController {
 
     }
     @GetMapping("/admin/fetchAllEvent")
-    public ResponseEntity<String> fetchEventAdminPanel(){
+    public ResponseEntity<List<ResponseEventAdminDTO>> fetchEventAdminPanel(){
 
-        List<ResponseEventSpecificationDTO> resultList = new ArrayList<>();
+        List<ResponseEventAdminDTO> resultList = new ArrayList<>();
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Range",
@@ -163,12 +164,9 @@ public class EventController {
 
         List<Event> eventsList = eventService.findAll();
         for(Event temp: eventsList){
-            resultList.add(eventMapper.toResponseEventSpecification())
+            resultList.add(eventMapper.toResponseEventAdmin(temp));
         }
-
-
-
-        return new ResponseEntity("positiv", responseHeaders,  HttpStatus.OK);
+        return new ResponseEntity(resultList, responseHeaders,  HttpStatus.OK);
 
 
     }
