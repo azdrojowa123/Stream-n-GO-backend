@@ -46,6 +46,7 @@ public abstract class EventMapper {
         newEvent.setLanguage(dto.getLanguage());
         newEvent.setStatus(false);
 
+
         return newEvent;
     }
 

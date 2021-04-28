@@ -1,6 +1,7 @@
 package com.example.xeva.model;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -54,6 +55,12 @@ public class Event {
 	
 	@Column(name = "Status")
 	private boolean status;
+
+	@Column(name = "DateS")
+	private LocalDateTime startDate;
+
+	@Column(name = "DateF")
+	private LocalDateTime endDate;
 	
 	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
 	Set<TimeEvent> timeEvents;
@@ -62,7 +69,7 @@ public class Event {
 		
 	}
 
-	public Event(User user, Organization organization,  String name,  String description, String daysOfWeek, boolean cyclical, String mode, String webAddress, String tags,String language, boolean status) {
+	public Event(User user, Organization organization, String name,  String description,  String daysOfWeek, boolean cyclical, String mode, String webAddress, String tags, String language, boolean status, LocalDateTime startDate, LocalDateTime endDate) {
 		this.user = user;
 		this.organization = organization;
 		this.name = name;
@@ -74,6 +81,24 @@ public class Event {
 		this.tags = tags;
 		this.language = language;
 		this.status = status;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
 	}
 
 	public boolean isStatus() {
