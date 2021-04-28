@@ -45,6 +45,8 @@ public class EventController {
     @PostMapping(value="/createEvent")
     public ResponseEntity<?> create(@Valid @RequestBody ObjHolder objHolder){
         Event event =  eventMapper.toEvent(objHolder.getEventDTO());
+        event.setStartDate(objHolder.getDateS());
+        event.setEndDate(objHolder.getDateF());
         eventService.save(event);
         System.out.println("dates"+ objHolder.getDateS()+objHolder.getDateF());
         if( !event.isCyclical() ){
