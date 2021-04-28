@@ -153,9 +153,16 @@ public class EventController {
     @GetMapping("/admin/fetchAllEvent")
     public ResponseEntity<String> fetchEventAdminPanel(){
 
+        List<ResponseEventSpecificationDTO> resultList = new ArrayList<>();
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Range",
                 "events 0-20/20");
+
+        List<Event> eventsList = eventService.findAll();
+        for(Event temp: eventsList){
+            resultList.add(eventMapper.toResponseEventSpecification())
+        }
 
 
 

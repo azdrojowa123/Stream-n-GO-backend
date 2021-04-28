@@ -93,6 +93,31 @@ public abstract class EventMapper {
         return response;
     }
 
+//    public ResponseEventSpecificationDTO toResponseEventSpecificationAdmin(Event event){
+//
+//        ResponseEventSpecificationDTO response = new ResponseEventSpecificationDTO();
+//        Organization organization = event.getOrganization();
+//        response.setCyclical(event.isCyclical());
+//        response.setDateS(generatorService.getOnlyDate(eve));
+//        response.setTimeS(generatorService.getOnlyTime(timeEvent.getStartDate()));
+//        response.setDateF(generatorService.getOnlyDate(timeEvent.getEndDate()));
+//        response.setTimeF(generatorService.getOnlyTime(timeEvent.getEndDate()));
+//        response.setLanguage(timeEvent.getEvent().getLanguage());
+//        response.setDescription(timeEvent.getEvent().getDescription());
+//        response.setOrgEmail(organization.getEmail());
+//        response.setOrgLogo(organization.getPhoto());
+//        response.setOrgName(organization.getName());
+//        response.setOrgWeb(organization.getWebPage());
+//        response.setTags(timeEvent.getEvent().getTags());
+//        response.setMode(timeEvent.getEvent().getMode());
+//        response.setDaysOfWeek(daysOfWeekFormat(timeEvent.getEvent().getDaysOfWeek()));
+//        response.setName(timeEvent.getEvent().getName());
+//        response.setWebAddress(timeEvent.getEvent().getWebAddress());
+//
+//
+//        return response;
+//    }
+
     public String daysOfWeekFormat(String daysOfWeek){
         List<String> newList = new ArrayList<>();
         List<String> daysList = Arrays.asList(daysOfWeek.split(","));

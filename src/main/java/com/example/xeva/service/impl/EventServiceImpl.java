@@ -7,6 +7,8 @@ import com.example.xeva.service.interfaces.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventServiceImpl implements EventService {
 
@@ -16,5 +18,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public void save(Event event) {
         eventRepository.save(event);
+    }
+
+    @Override
+    public List findAll() {
+        return eventRepository.findAll();
     }
 }
