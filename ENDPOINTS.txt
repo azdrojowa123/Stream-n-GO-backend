@@ -142,3 +142,6 @@ SWAGGER: /swagger-ui.html
             "orgWeb": "tempus mauris"
     }
 
+14. /admin/deleteEvent/{id} -> usuwa event o podanym id przez Admina, zwraca 202 CREATED po poprawnym usunięciu eventu. Usuwa też
+rekordy z tabeli TimeEvent
+

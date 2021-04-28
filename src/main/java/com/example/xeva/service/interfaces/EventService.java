@@ -7,5 +7,6 @@ import java.util.List;
 public interface EventService {
     void save(Event event);
     List findAll();
+    void deleteById(int id);
 
 }

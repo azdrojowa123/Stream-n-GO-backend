@@ -24,4 +24,9 @@ public class EventServiceImpl implements EventService {
     public List findAll() {
         return eventRepository.findAll();
     }
+
+    @Override
+    public void deleteById(int id) {
+        eventRepository.deleteById(id);
+    }
 }

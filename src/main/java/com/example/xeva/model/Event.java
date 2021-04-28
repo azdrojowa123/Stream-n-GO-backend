@@ -62,7 +62,7 @@ public class Event {
 	@Column(name = "DateF")
 	private LocalDateTime endDate;
 	
-	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="event", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	Set<TimeEvent> timeEvents;
 
 	public Event() {

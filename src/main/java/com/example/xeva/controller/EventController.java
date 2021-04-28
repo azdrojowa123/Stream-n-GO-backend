@@ -166,9 +166,15 @@ public class EventController {
         for(Event temp: eventsList){
             resultList.add(eventMapper.toResponseEventAdmin(temp));
         }
+        
         return new ResponseEntity(resultList, responseHeaders,  HttpStatus.OK);
-
-
     }
+
+    @DeleteMapping("/admin/deleteEvent/{id}")
+    public ResponseEntity<?> deleteEventAdmin(@PathVariable(value = "id") int id){
+        eventService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
 
 }
