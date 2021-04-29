@@ -108,6 +108,7 @@ public class UserController {
 
         User user = userMapper.toNewUser(userDTO);
         user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
+        user.setIsEnabled(false);
 
         userService.save(user);
 
