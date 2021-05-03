@@ -11,6 +11,7 @@ public interface UserService {
     void save(User user);
     User findById(int id);
     User findByEmail(String email);
+    void makeUserActiv(int id);
 
 
 }

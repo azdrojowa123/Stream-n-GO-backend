@@ -30,4 +30,9 @@ public class TokenVerificationImpl implements TokenService {
     public TokenVerification findById(int id) {
         return tokenRepository.findById(id);
     }
+
+    @Override
+    public TokenVerification findByToken(String token) {
+        return tokenRepository.findByToken(token);
+    }
 }

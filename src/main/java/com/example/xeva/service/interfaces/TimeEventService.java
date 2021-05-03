@@ -11,4 +11,5 @@ public interface TimeEventService {
     List<TimeEvent> findFromDay(LocalDate day);
     List<TimeEvent> findPast();
     List<TimeEvent> findFuture();
+
 }

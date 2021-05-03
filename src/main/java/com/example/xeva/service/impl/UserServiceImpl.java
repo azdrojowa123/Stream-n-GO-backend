@@ -38,5 +38,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public void makeUserActiv(int id) {
+        userRepository.updateUserToActive(id);
+    }
+
 
 }
