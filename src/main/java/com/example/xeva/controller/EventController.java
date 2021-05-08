@@ -1,11 +1,13 @@
 package com.example.xeva.controller;
 
+import com.example.xeva.dto.ResponseEventAdminDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.model.*;
 import com.example.xeva.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -45,6 +47,8 @@ public class EventController {
     @PostMapping(value="/createEvent")
     public ResponseEntity<?> create(@Valid @RequestBody ObjHolder objHolder){
         Event event =  eventMapper.toEvent(objHolder.getEventDTO());
+        event.setStartDate(objHolder.getDateS());
+        event.setEndDate(objHolder.getDateF());
         eventService.save(event);
         System.out.println("dates"+ objHolder.getDateS()+objHolder.getDateF());
         if( !event.isCyclical() ){
@@ -149,5 +153,28 @@ public class EventController {
         return  new ResponseEntity(response, HttpStatus.OK);
 
     }
+    @GetMapping("/admin/fetchAllEvent")
+    public ResponseEntity<List<ResponseEventAdminDTO>> fetchEventAdminPanel(){
+
+        List<ResponseEventAdminDTO> resultList = new ArrayList<>();
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Range",
+                "events 0-20/20");
+
+        List<Event> eventsList = eventService.findAll();
+        for(Event temp: eventsList){
+            resultList.add(eventMapper.toResponseEventAdmin(temp));
+        }
+        
+        return new ResponseEntity(resultList, responseHeaders,  HttpStatus.OK);
+    }
+
+    @DeleteMapping("/admin/deleteEvent/{id}")
+    public ResponseEntity<?> deleteEventAdmin(@PathVariable(value = "id") int id){
+        eventService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
 
 }

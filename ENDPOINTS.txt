@@ -77,6 +77,7 @@ SWAGGER: /swagger-ui.html
 
 10. /public/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
 
+
     Przyjmuje UserDTO w postaci:
 
     Przyjmuje NewUserDTO w postaci:
@@ -118,4 +119,29 @@ SWAGGER: /swagger-ui.html
             "country": "String
 
     }
+
+13. /admin/fetchAllEvent -> zwaraca wynik ResponseEventAdminDTO, dostępny tylko dla użytkowników zalogowanych jako admin i globalAdmin
+
+    ResponseEventAdminDTO {
+            "eventId": 1,
+            "name": "Politechnika Wrocławska",
+            "description": "aliquet molestie",
+            "daysOfWeek": "th,fr,su,we",
+            "cyclical": true,
+            "mode": "sollicitudin",
+            "webAddress": "nec mauris",
+            "tags": "Prezentacja",
+            "language": "Polski",
+            "dateS": "2020-08-18",
+            "dateF": "2022-02-22",
+            "timeS": "12:47",
+            "timeF": "08:18",
+            "orgName": "Politechnika Wrocławska",
+            "orgLogo": "at",
+            "orgEmail": "eleifend.vitae@etlibero.ca",
+            "orgWeb": "tempus mauris"
+    }
+
+14. /admin/deleteEvent/{id} -> usuwa event o podanym id przez Admina, zwraca 202 CREATED po poprawnym usunięciu eventu. Usuwa też
+rekordy z tabeli TimeEvent
 

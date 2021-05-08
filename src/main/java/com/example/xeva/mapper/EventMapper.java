@@ -2,6 +2,7 @@ package com.example.xeva.mapper;
 
 import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.EventDTO;
+import com.example.xeva.dto.ResponseEventAdminDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.model.*;
@@ -46,6 +47,7 @@ public abstract class EventMapper {
         newEvent.setLanguage(dto.getLanguage());
         newEvent.setStatus(false);
 
+
         return newEvent;
     }
 
@@ -88,6 +90,32 @@ public abstract class EventMapper {
         response.setDaysOfWeek(daysOfWeekFormat(timeEvent.getEvent().getDaysOfWeek()));
         response.setName(timeEvent.getEvent().getName());
         response.setWebAddress(timeEvent.getEvent().getWebAddress());
+
+
+        return response;
+    }
+
+    public ResponseEventAdminDTO toResponseEventAdmin(Event event){
+
+        ResponseEventAdminDTO response = new ResponseEventAdminDTO();
+        Organization organization = event.getOrganization();
+        response.setEventId(event.getId());
+        response.setCyclical(event.isCyclical());
+        response.setDateS(generatorService.getOnlyDate(event.getStartDate()));
+        response.setTimeS(generatorService.getOnlyTime(event.getStartDate()));
+        response.setDateF(generatorService.getOnlyDate(event.getEndDate()));
+        response.setTimeF(generatorService.getOnlyTime(event.getEndDate()));
+        response.setLanguage(event.getLanguage());
+        response.setDescription(event.getDescription());
+        response.setOrgEmail(organization.getEmail());
+        response.setOrgLogo(organization.getPhoto());
+        response.setOrgName(organization.getName());
+        response.setOrgWeb(organization.getWebPage());
+        response.setTags(event.getTags());
+        response.setMode(event.getMode());
+        response.setDaysOfWeek(daysOfWeekFormat(event.getDaysOfWeek()));
+        response.setName(event.getName());
+        response.setWebAddress(event.getWebAddress());
 
 
         return response;

@@ -32,7 +32,6 @@ public class User {
     private Role role;
 
 
-
     @ManyToMany(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST})
