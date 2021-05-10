@@ -148,7 +148,7 @@ public class UserController {
         TokenVerification userTokenVerification = tokenService.findByToken(confirmationToken);
         User user = userService.findById(userTokenVerification.getUser().getId());
         userService.makeUserActiv(user.getId());
-
+        response.addHeader("register", "true");
         response.sendRedirect("http://localhost:3000/sign-in");
 
     }
