@@ -1,0 +1,44 @@
+Request przesyłany za pomocą klasy ObjHolder
+
+	class ObjHolder{
+		EventDTO eventDTO; -> event dto 
+		String dateS; -> poczatek eventu 
+		String dateE; -> koniec eventu 
+	} 
+
+Przykladowo:
+	"eventDTO": {
+ 	       "username": String
+        	"organization": {
+            		"name": String
+            		"country": String
+           		"province": String
+            		"city": String
+            		"postalCode": String
+            		"street": String
+            		"nip": String
+            		"phoneNumber": String
+            		"email": String
+            		"webPage": String
+            		"photo": String
+        	},
+       		"eventName": String
+       		"description": String
+       		"daysOfWeek": String -> dokładny format poniżej
+       		"cyclical": int -> wartości: 0 jako fałsz i 1 jako prawda
+       		"mode": String,
+       		"webAddress": String,
+       		"tags": String,
+       		"language": String
+       		"status": int -> wartości: 0 jako fałsz i 1 jako prawda  		
+	}
+	"dateS":  String w formacie yyyy-MM-dd HH:mm np. "2021-04-20 15:00"
+    	"dateF":  String w takim samym formacie 
+				
+    return this.http.post(
+                    `http://localhost:8088/createEvent`
+                    objHolder);
+    }
+
+    1. days_of_week jako String oddzielony przecinkami, konwencja nazewnicza dnia tygodnia: 
+    MONDAY, TUESDAY ,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
