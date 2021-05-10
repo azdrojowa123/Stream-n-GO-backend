@@ -176,5 +176,10 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+    @PostMapping("/admin/acceptEvent/{id}")
+    public ResponseEntity<?> acceptEvent(@PathVariable(value = "id") int id){
+        eventService.acceptEvent(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
