@@ -50,7 +50,7 @@ public class JwtTokenUtil implements Serializable {
         claims.put("authority", userDetails.getAuthorities());
         String jwt = Jwts.builder().setClaims(claims).
                 setSubject("xeva app").setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date((new Date()).getTime() + 300000))
+                .setExpiration(new Date((new Date()).getTime() + (1000 * 60 * 60 * 3)))
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.JWT_KEY).compact();
 
         return jwt;
