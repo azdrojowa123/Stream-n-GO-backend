@@ -1,6 +1,6 @@
 package com.example.xeva.controller;
 
-import com.example.xeva.dto.ResponseEventAdminDTO;
+import com.example.xeva.dto.admin.*;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.mapper.EventMapper;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -153,21 +154,30 @@ public class EventController {
         return  new ResponseEntity(response, HttpStatus.OK);
 
     }
-    @GetMapping("/admin/fetchAllEvent")
-    public ResponseEntity<List<ResponseEventAdminDTO>> fetchEventAdminPanel(){
+    @GetMapping("/admin/getEventList")
+    public ResponseEntity<PAdminGetListDTO> fetchEventAdminPanel(PAdminObject object){
 
         List<ResponseEventAdminDTO> resultList = new ArrayList<>();
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Content-Range",
-                "events 0-20/20");
-
         List<Event> eventsList = eventService.findAll();
-        for(Event temp: eventsList){
-            resultList.add(eventMapper.toResponseEventAdmin(temp));
+        int page = object.getRange().get(0);
+        int perPage = object.getRange().get(1);
+        int first = page*perPage;
+        int last = first + perPage;
+        if (last > eventsList.size()){
+            last = eventsList.size();
         }
+        for(int i = first; i<last; i++){
+            resultList.add(eventMapper.toResponseEventAdmin(eventsList.get(i)));
+        }
+        String temp = "events "+page+"-"+perPage+"/"+eventsList.size();
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("Content-Range", temp);
+        responseHeaders.set("Access-Control-Expose-Headers",
+                "Content-Range");
+
+        PAdminGetListDTO responseBody = new PAdminGetListDTO(resultList,eventsList.size());
         
-        return new ResponseEntity(resultList, responseHeaders,  HttpStatus.OK);
+        return new ResponseEntity(responseBody, responseHeaders,  HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/deleteEvent/{id}")

@@ -1,8 +1,8 @@
-package com.example.xeva.dto;
+package com.example.xeva.dto.admin;
 
 public class ResponseEventAdminDTO {
 
-    public int eventId;
+    public int id;
     public String name;
     public String description;
     public String daysOfWeek;
@@ -151,10 +151,10 @@ public class ResponseEventAdminDTO {
     }
 
     public int getEventId() {
-        return eventId;
+        return id;
     }
 
     public void setEventId(int eventId) {
-        this.eventId = eventId;
+        this.id = eventId;
     }
 }

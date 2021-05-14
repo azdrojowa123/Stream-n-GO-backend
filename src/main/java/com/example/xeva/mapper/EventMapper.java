@@ -1,8 +1,7 @@
 package com.example.xeva.mapper;
 
-import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.EventDTO;
-import com.example.xeva.dto.ResponseEventAdminDTO;
+import com.example.xeva.dto.admin.ResponseEventAdminDTO;
 import com.example.xeva.dto.ResponseEventDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.model.*;
@@ -10,7 +9,6 @@ import com.example.xeva.service.interfaces.GeneratorService;
 import com.example.xeva.service.interfaces.OrganizationService;
 import com.example.xeva.service.interfaces.UserService;
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

@@ -54,11 +54,6 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
 
     @Autowired
     private OrganizationRepository organizationRepository;
@@ -72,11 +67,6 @@ public class UserController {
     @Autowired
     private EventMapper eventMapper;
 
-    @Autowired
-    private TimeEventService timeEventService;
-
-    @Autowired
-    private TimeEventRepository timeEventRepository;
 
     @Autowired
     public PasswordEncoder passwordEncoder;
