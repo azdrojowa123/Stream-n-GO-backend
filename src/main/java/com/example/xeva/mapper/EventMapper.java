@@ -97,7 +97,7 @@ public abstract class EventMapper {
 
         ResponseEventAdminDTO response = new ResponseEventAdminDTO();
         Organization organization = event.getOrganization();
-        response.setEventId(event.getId());
+        response.setId(event.getId());
         response.setCyclical(event.isCyclical());
         response.setDateS(generatorService.getOnlyDate(event.getStartDate()));
         response.setTimeS(generatorService.getOnlyTime(event.getStartDate()));

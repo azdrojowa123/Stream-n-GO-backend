@@ -150,11 +150,11 @@ public class ResponseEventAdminDTO {
         this.orgWeb = orgWeb;
     }
 
-    public int getEventId() {
+    public int geId() {
         return id;
     }
 
-    public void setEventId(int eventId) {
+    public void setId(int eventId) {
         this.id = eventId;
     }
 }
