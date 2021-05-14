@@ -155,12 +155,12 @@ public class EventController {
 
     }
     @GetMapping("/admin/getEventList")
-    public ResponseEntity<PAdminGetListDTO> fetchEventAdminPanel(PAdminObject object){
+    public ResponseEntity<PAdminGetListDTO> fetchEventAdminPanel(@RequestParam int page, @RequestParam int perPage){
 
         List<ResponseEventAdminDTO> resultList = new ArrayList<>();
         List<Event> eventsList = eventService.findAll();
-        int page = object.getRange().get(0);
-        int perPage = object.getRange().get(1);
+        //int page = object.getRange().get(0);
+        //int perPage = object.getRange().get(1);
         int first = page*perPage;
         int last = first + perPage;
         if (last > eventsList.size()){
