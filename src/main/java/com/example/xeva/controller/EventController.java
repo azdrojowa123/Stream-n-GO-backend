@@ -159,8 +159,6 @@ public class EventController {
 
         List<ResponseEventAdminDTO> resultList = new ArrayList<>();
         List<Event> eventsList = eventService.findAll();
-        //int page = object.getRange().get(0);
-        //int perPage = object.getRange().get(1);
         int first = page*perPage;
         int last = first + perPage;
         if (last > eventsList.size()){

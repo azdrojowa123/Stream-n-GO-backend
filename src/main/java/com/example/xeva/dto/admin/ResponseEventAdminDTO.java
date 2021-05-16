@@ -19,6 +19,7 @@ public class ResponseEventAdminDTO {
     public String orgLogo;
     public String orgEmail;
     public String orgWeb;
+    public boolean status;
 
     public ResponseEventAdminDTO(){}
 
@@ -156,5 +157,17 @@ public class ResponseEventAdminDTO {
 
     public void setId(int eventId) {
         this.id = eventId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

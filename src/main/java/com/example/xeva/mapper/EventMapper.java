@@ -114,6 +114,7 @@ public abstract class EventMapper {
         response.setDaysOfWeek(daysOfWeekFormat(event.getDaysOfWeek()));
         response.setName(event.getName());
         response.setWebAddress(event.getWebAddress());
+        response.setStatus(event.getStatus());
 
 
         return response;
