@@ -178,7 +178,7 @@ public class EventController {
         return new ResponseEntity(responseBody, responseHeaders,  HttpStatus.OK);
     }
 
-    @GetMapping("/admin/admin/getOneEvent/{id}")
+    @GetMapping("/admin/getOneEvent/{id}")
     public ResponseEntity<ResponseEventAdminDTO> fetchOneAdminEvent(@PathVariable(value = "id") int id){
         Event event = eventService.findById(id);
         ResponseEventAdminDTO eventDTO = eventMapper.toResponseEventAdmin(event);
