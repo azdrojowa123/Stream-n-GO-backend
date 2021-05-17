@@ -9,5 +9,6 @@ public interface EventService {
     List findAll();
     void deleteById(int id);
     void acceptEvent(int id);
+    Event findById(int id);
 
 }

@@ -178,10 +178,19 @@ public class EventController {
         return new ResponseEntity(responseBody, responseHeaders,  HttpStatus.OK);
     }
 
+    @GetMapping("/admin/admin/getOneEvent")
+    public ResponseEntity<ResponseEventAdminDTO> fetchOneAdminEvent(@PathVariable(value = "id") int id){
+        Event event = eventService.findById(id);
+        ResponseEventAdminDTO eventDTO = eventMapper.toResponseEventAdmin(event);
+        return new ResponseEntity(eventDTO,  HttpStatus.OK);
+    }
+
     @DeleteMapping("/admin/deleteEvent/{id}")
-    public ResponseEntity<?> deleteEventAdmin(@PathVariable(value = "id") int id){
+    public ResponseEntity<ResponseEventAdminDTO> deleteEventAdmin(@PathVariable(value = "id") int id){
+        Event event = eventService.findById(id);
+        ResponseEventAdminDTO eventDTO = eventMapper.toResponseEventAdmin(event);
         eventService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity(eventDTO, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/admin/acceptEvent/{id}")
