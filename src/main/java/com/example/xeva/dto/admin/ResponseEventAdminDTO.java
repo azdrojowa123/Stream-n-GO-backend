@@ -15,10 +15,8 @@ public class ResponseEventAdminDTO {
     public String dateF;
     public String timeS;
     public String timeF;
+    public int orgId;
     public String orgName;
-    public String orgLogo;
-    public String orgEmail;
-    public String orgWeb;
     public boolean status;
 
     public ResponseEventAdminDTO(){}
@@ -57,6 +55,14 @@ public class ResponseEventAdminDTO {
 
     public String getMode() {
         return mode;
+    }
+
+    public int getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(int orgId) {
+        this.orgId = orgId;
     }
 
     public void setMode(String mode) {
@@ -127,29 +133,6 @@ public class ResponseEventAdminDTO {
         this.orgName = orgName;
     }
 
-    public String getOrgLogo() {
-        return orgLogo;
-    }
-
-    public void setOrgLogo(String orgLogo) {
-        this.orgLogo = orgLogo;
-    }
-
-    public String getOrgEmail() {
-        return orgEmail;
-    }
-
-    public void setOrgEmail(String orgEmail) {
-        this.orgEmail = orgEmail;
-    }
-
-    public String getOrgWeb() {
-        return orgWeb;
-    }
-
-    public void setOrgWeb(String orgWeb) {
-        this.orgWeb = orgWeb;
-    }
 
     public int geId() {
         return id;

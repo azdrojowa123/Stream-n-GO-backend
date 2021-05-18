@@ -137,9 +137,7 @@ SWAGGER: /swagger-ui.html
             "timeS": "12:47",
             "timeF": "08:18",
             "orgName": "Politechnika Wrocławska",
-            "orgLogo": "at",
-            "orgEmail": "eleifend.vitae@etlibero.ca",
-            "orgWeb": "tempus mauris"
+            "orgId": idOrganizacji
     }
 
 14. /admin/deleteEvent/{id} -> usuwa event o podanym id przez Admina, zwraca 202 CREATED po poprawnym usunięciu eventu. Usuwa też

@@ -105,15 +105,13 @@ public abstract class EventMapper {
         response.setTimeF(generatorService.getOnlyTime(event.getEndDate()));
         response.setLanguage(event.getLanguage());
         response.setDescription(event.getDescription());
-        response.setOrgEmail(organization.getEmail());
-        response.setOrgLogo(organization.getPhoto());
         response.setOrgName(organization.getName());
-        response.setOrgWeb(organization.getWebPage());
         response.setTags(event.getTags());
         response.setMode(event.getMode());
         response.setDaysOfWeek(daysOfWeekFormat(event.getDaysOfWeek()));
         response.setName(event.getName());
         response.setWebAddress(event.getWebAddress());
+        response.setOrgId(organization.getId());
         response.setStatus(event.getStatus());
 
 
