@@ -18,6 +18,8 @@ public class ResponseEventAdminDTO {
     public int orgId;
     public String orgName;
     public boolean status;
+    public int userId;
+    public String userEmail;
 
     public ResponseEventAdminDTO(){}
 
@@ -63,6 +65,22 @@ public class ResponseEventAdminDTO {
 
     public void setOrgId(int orgId) {
         this.orgId = orgId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setMode(String mode) {

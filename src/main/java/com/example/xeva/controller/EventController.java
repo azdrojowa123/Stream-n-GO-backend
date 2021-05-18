@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.method.P;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -191,6 +192,15 @@ public class EventController {
         ResponseEventAdminDTO eventDTO = eventMapper.toResponseEventAdmin(event);
         eventService.deleteById(id);
         return new ResponseEntity(eventDTO, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/admin/updateEvent")
+    public ResponseEntity<ResponseEventAdminDTO> updateEvent(@RequestBody ResponseEventAdminDTO event){
+        Event updatedEvent = eventMapper.changeUpdateEvent(event, eventService.findById(event.geId()));
+        eventService.save(updatedEvent);
+        ResponseEventAdminDTO newResponse = eventMapper.toResponseEventAdmin(updatedEvent);
+        return new ResponseEntity(newResponse, HttpStatus.OK);
+
     }
 
     @PostMapping("/admin/acceptEvent/{id}")

@@ -29,6 +29,7 @@ public abstract class EventMapper {
     @Autowired
     private GeneratorService generatorService;
 
+
     public Event toEvent(EventDTO dto){
         Event newEvent = new Event();
         User eventOwner = userService.findByEmail(dto.getUsername());
@@ -113,6 +114,8 @@ public abstract class EventMapper {
         response.setWebAddress(event.getWebAddress());
         response.setOrgId(organization.getId());
         response.setStatus(event.getStatus());
+        response.setUserId(event.getUser().getId());
+        response.setUserEmail(event.getUser().getEmail());
 
 
         return response;
@@ -150,7 +153,7 @@ public abstract class EventMapper {
        return String.join(",", newList);
     }
 
-   public Organization checkIfOrgExsist(Organization org){
+    public Organization checkIfOrgExsist(Organization org){
        if(organizationService.findByName(org.getName()) != null){
            return organizationService.findByName(org.getName());
        } else {
@@ -158,7 +161,7 @@ public abstract class EventMapper {
        }
    }
 
-   public boolean checkIfEventSaved(User user, int timeEventId){
+    public boolean checkIfEventSaved(User user, int timeEventId){
        boolean exists = false;
        Iterator<TimeEvent> itr = user.getSavedEvents().iterator();
         while(itr.hasNext()){
@@ -169,6 +172,18 @@ public abstract class EventMapper {
         }
         return exists;
    }
+
+    public Event changeUpdateEvent(ResponseEventAdminDTO eventAdmin, Event oldEvent){
+        oldEvent.setLanguage(eventAdmin.getLanguage());
+        oldEvent.setTags(eventAdmin.getTags());
+        oldEvent.setMode(eventAdmin.getMode());
+        oldEvent.setDescription(eventAdmin.getDescription());
+        oldEvent.setName(eventAdmin.getName());
+        oldEvent.setWebAddress(eventAdmin.getWebAddress());
+        oldEvent.setCyclical(eventAdmin.isCyclical());
+        oldEvent.setStatus(eventAdmin.isStatus());
+        return  oldEvent;
+    }
 
 
    @Autowired
