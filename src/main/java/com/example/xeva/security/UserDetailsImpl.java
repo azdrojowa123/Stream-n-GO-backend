@@ -22,6 +22,8 @@ public class UserDetailsImpl implements UserDetailsService {
         User user = userRepository.findByEmail(username);
         if(user == null){
             throw new UsernameNotFoundException("User details not found for the user : " + username);
+        } else if (user.getIsEnabled() == false ){
+            throw new UsernameNotFoundException("User with name " + username+" is not active yet");
         } else {
             return new SecurityCustomer(user);
         }

@@ -31,6 +31,8 @@ public class User {
     @JoinColumn(name="Role_id", nullable = false)
     private Role role;
 
+    @Column(name = "Is_Enabled")
+    private boolean isEnabled;
 
     @ManyToMany(cascade = {
             CascadeType.MERGE,
@@ -51,17 +53,25 @@ public class User {
         this.savedEvents = savedEvents;
     }
 
-    public User(String name, String surname, String email, String pwd, Role role) {
+    public User(String name, String surname, String email, String pwd, Role role, boolean isEnabled) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.pwd = pwd;
         this.role = role;
+        this.isEnabled = isEnabled;
     }
 
     public User() {
     }
 
+    public boolean getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
 
     public Set<Event> getOwnedEvent() {
         return ownedEvent;

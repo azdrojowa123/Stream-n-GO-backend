@@ -75,7 +75,7 @@ SWAGGER: /swagger-ui.html
 
 
 
-10. /public/registerv(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
+10. /public/register(@RequestBody UserDTO userDTO) -> rejestruje użytkownika. Zwraca response 200 przy poprawnym zapisaniu do bazy.
 
 
     Przyjmuje UserDTO w postaci:
