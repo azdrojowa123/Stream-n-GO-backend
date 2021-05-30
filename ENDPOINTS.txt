@@ -144,3 +144,42 @@ SWAGGER: /swagger-ui.html
 rekordy z tabeli TimeEvent
 
 15. /admin/acceptEvent/{id} -> akceptuje event o poadanym id, dostepne tylko z konta Admina.
+
+16. Delete ->  /admin/users/deleteUser/{id}" -> usuwa użytkownika o podanym id. Zwraca usunięty rekord w postaci:
+     {
+         "id",
+         "name",
+	 "surname",
+	 "email",
+	 "pwd", 
+	 "role" -> jako string z nazwą roli.
+     }
+
+17. PUT -> /admin/users/updateUser -> aktualizuje dane użytkownika. Przyjmuje zaktualiozowane dane usera o podanym id w posatci:
+        {
+         	"id",
+         	"name",
+	 	"surname",
+	 	"email",
+	 	"pwd", 
+	 	"role" -> jako string z nazwą roli.
+        }
+	zwraca response w postaci
+	{	
+		"id",
+         	"name",
+	 	"surname",
+	 	"email",
+	 	"pwd", 
+	 	"role" -> jako typ Role
+	}
+
+18. Get -> /admin/users/getOne/{id} -> zwraca użytwkonika o podanym id w postaci:
+    {
+         "id",
+         "name",
+	 "surname",
+	 "email",
+	 "pwd", 
+	 "role" -> jako string z nazwą roli.
+     }

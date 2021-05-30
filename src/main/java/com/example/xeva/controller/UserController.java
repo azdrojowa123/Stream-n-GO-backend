@@ -1,39 +1,29 @@
 package com.example.xeva.controller;
 
-import antlr.Token;
-import com.example.xeva.dao.EventRepository;
 import com.example.xeva.dao.OrganizationRepository;
-import com.example.xeva.dao.TimeEventRepository;
-import com.example.xeva.dao.UserRepository;
 import com.example.xeva.dto.LoginResponseDTO;
 import com.example.xeva.dto.NewUserDTO;
+import com.example.xeva.dto.ResponseEventSpecificationDTO;
+import com.example.xeva.dto.UserDTO;
+import com.example.xeva.dto.admin.ResponseEventAdminDTO;
+import com.example.xeva.dto.admin.ResponseUserAdminDTO;
 import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.mapper.UserMapper;
-import com.example.xeva.model.JwtRequest;
-import com.example.xeva.model.TimeEvent;
-import com.example.xeva.model.TokenVerification;
-import com.example.xeva.model.User;
+import com.example.xeva.model.*;
 import com.example.xeva.security.JwtTokenUtil;
 import com.example.xeva.security.UserDetailsImpl;
 
 import com.example.xeva.service.impl.EmailService;
 import com.example.xeva.service.interfaces.EventService;
-import com.example.xeva.service.interfaces.TimeEventService;
 import com.example.xeva.service.interfaces.TokenService;
 import com.example.xeva.service.interfaces.UserService;
-import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +31,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
@@ -141,5 +127,31 @@ public class UserController {
 
     }
 
+    @DeleteMapping("/admin/users/deleteUser/{id}")
+    public ResponseEntity<ResponseUserAdminDTO> deleteUserAdmin(@PathVariable(value = "id") int id){
+        User user = userService.findById(id);
+        System.out.println(user.toString());
+        ResponseUserAdminDTO userDTO = userMapper.toResponseUserAddminDTO(user);
+        userService.deleteByID(id);
+        return new ResponseEntity(userDTO, HttpStatus.ACCEPTED);
+    }
 
+    @PutMapping("/admin/users/updateUser")
+    public ResponseEntity<ResponseUserAdminDTO> updateUserAdmin(@RequestBody UserDTO userDTO){
+        User mappedUser = userMapper.toUser(userDTO);
+        System.out.println("ROLE1" + mappedUser.getRole().toString());
+        User updatedUser = userMapper.changeUpdateUser(mappedUser, userService.findById(mappedUser.getId()));
+        System.out.println("ROLE2" + updatedUser.getRole().toString());
+        userService.save(updatedUser);
+        ResponseUserAdminDTO responseUserDTO = userMapper.toResponseUserAddminDTO(updatedUser);
+        System.out.println("ROLE3" + responseUserDTO.getRole().toString());
+        return new ResponseEntity(responseUserDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/admin/users/getOne/{id}")
+    public ResponseEntity<ResponseUserAdminDTO> getUser(@PathVariable(value = "id") int id){
+        User user = userService.findById(id);
+        ResponseUserAdminDTO userDTO = userMapper.toResponseUserAddminDTO(user);
+        return new ResponseEntity(userDTO, HttpStatus.OK);
+    }
 }

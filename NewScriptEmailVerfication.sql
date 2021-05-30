@@ -48,12 +48,11 @@ CREATE TABLE IF NOT EXISTS `XEVA`.`Users` (
   `Is_Enabled` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fkRole_id_idx` (`Role_id` ASC) VISIBLE,
-  UNIQUE INDEX `Name_UNIQUE` (`Name` ASC) VISIBLE,
   CONSTRAINT `fkRole_id`
     FOREIGN KEY (`Role_id`)
     REFERENCES `XEVA`.`Roles` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `XEVA`.`token_verification`;
@@ -218,54 +217,57 @@ INSERT INTO `Organizations` (`Name`,`Country`,`Province`,`City`,`Postal_code`,`S
 INSERT INTO `Organizations` (`Name`,`Country`,`Province`,`City`,`Postal_code`,`Street`,`NIP`,`Phone_number`,`Email`,`Web_page`,`Photo`) VALUES ('Nokia','Finlandia','Kirkcudbrightshire','Belleville','D1F1T3','432-2542 Dolor Av.',null,'023185163','nokia.adipiscing.enim@orciluctuset.ca','purus. curts','id, erat.');
 INSERT INTO `Organizations` (`Name`,`Country`,`Province`,`City`,`Postal_code`,`Street`,`NIP`,`Phone_number`,`Email`,`Web_page`,`Photo`) VALUES ('Comarch','Polska','Roxburghshire','Dana Point','F8N1I1','1556 Ut Road',null,'781275108','comarch.sed@ac.edu','Vivamus molestie','nec a,');
 
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('3','1','Politechnika Wrocławska','aliquet molestie','THURSDAY, FRIDAY, SUNDAY, WEDNESDAY','1','sollicitudin','nec mauris','Prezentacja','Polski','0', '2020-08-18 12:47:38', '2022-02-22 08:18:57');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','9','Legnicka specjalna strefa ekonomiczna','cursus purus. Nullam scelerisque neque sed sem egestas','THURSDAY','0','eu','nec, mollis','Konferencja','Polski','1', '2021-08-26 07:04:55', '2021-08-26 22:02:54');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','2','Niezależne zrzeszenie studentów','Curabitur consequat, lectus sit amet luctus vulputate,','FRIDAY, WEDNESDAY','1','lorem','interdum libero dui','Szkolenie','Angielski','0', '2021-09-05 16:15:48', '2022-02-04 19:44:54');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('10','5','Fundacja CODE:ME','rutrum, justo. Praesent luctus. Curabitur egestas nunc','TUESDAY','0','Donec','Donec','Seminarium','Angielski','1', '2021-10-01 01:25:17', '2021-10-01 03:41:27');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('4','8','Miasto Wrocław','mollis. Integer tincidunt aliquam','THURSDAY','0','in','amet','Prezentacja','Angielski','1', '2021-02-16 15:02:09', '2021-02-16 16:08:30');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('4','11','Stowarzyszenie przyjaciół piwa','neque. Nullam nisl.','SATURDAY, THURSDAY','1','in','amet','Konferencja','Polski','1', '2020-06-15 12:23:05', '2021-03-15 14:13:05');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('2','1','Agencja rozmowju aglomeracji Wrocławskiej','metus. In lorem. Donec elementum, lorem ut','FRIDAY','0','in','sed','Prezentacja','Polski','0', '2020-04-19 12:23:12', '2020-04-19 15:17:22');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('8','11','Gmina Środa śłąska','sit amet diam eu dolor egestas rhoncus. Proin','FRIDAY','0','nec','a,','Konferencja','Polski','0', '2021-05-27 02:17:24', '2021-05-27 21:51:32');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('1','8','Wałbrzyska specjalna strefa ekonomiczna','vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget','WEDNESDAY','1','neque','laoreet ipsum.','Szkolenie','Polski','1', '2020-10-16 09:43:32', '2021-06-23 20:13:18');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('10','8','Eventlabs SP. Z.O.O.','nulla magna, malesuada vel, convallis in, cursus','THURSDAY, FRIDAY','1','ullamcorper.','porttitor','Konferencja','Angielski','1', '2021-07-14 18:56:14', '2021-07-14 20:13:17');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','11','Nokia','enim nec tempus scelerisque, lorem','THURSDAY','1','convallis','eu,','Szkolenie', 'Angielski','0', '2020-04-13 00:15:04', '2021-04-05 22:43:22');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','11','Comarch','enim, condimentum eget, volutpat ornare, facilisis eget, ipsum. Donec','WEDNESDAY','1','sodales','et','Prezentacja','Polski','0', '2020-04-13 00:15:04', '2021-04-05 22:43:22');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('3','1','Sagra','Sagra to wiejski festyn, podczas którego serwuje się potrawy na otwartym powietrzu. Festynowi towarzyszy muzyka na żywo i, w zależności od miejsca, kilka stoisk oferujących produkty wykonane przez mieszkańców wioski. Jedzenie jest smaczne i tanie, a atmosfera bardzo domowa, co zapewniają przyjaźni i głośni Włosi.','THURSDAY, FRIDAY, SUNDAY, WEDNESDAY','1','ONLINE','nec mauris','Prezentacja','Polski','1', '2021-04-18 12:47:38', '2022-02-22 08:18:57');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','9','Fiera','Nazwą fiera w języku włoskim określa się wystawy, targi lub też jarmark lub festyn wiejski, w zależności od tego gdzie fiera ma miejsce.','THURSDAY','0','ONLINE','nec, mollis','Konferencja','Polski','0', '2021-06-12 07:04:55', '2021-06-12 22:02:54');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','2','Mostra','Mostra to wystawa, najczęściej sztuki. W okresie całego roku w Toskanii ma miejsce wiele wystaw sztuki','FRIDAY, WEDNESDAY','1','OFFLINE','interdum libero dui','Szkolenie','Polski','1', '2021-06-17 16:15:48', '2022-02-04 19:44:54');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('10','5','Poszukiwania skarbów','Obudź w swoim dziecku małego odkrywcę! Zapraszamy Was do terenowej gry, którą przygotujecie we własnym domu dzięki otrzymanym od nas materiałom! ','TUESDAY','0','ONLINE','Donec','Seminarium','Polski','1', '2021-06-17 01:25:17', '2021-06-17 03:41:27');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('4','8','Zostań mistrzem firmowej kuchni','Dobre jedzenie to jedna z największych przyjemności. Wyszukane potrawy, egzotyczne smaki i ciekawe połączenia – skutecznie poprawiają humor. Czas przyrządzić je u siebie w domu w towarzystwie całego zespołu!','THURSDAY','0','OFFLINE','amet','Szkolenie','Polski','1', '2021-02-16 15:02:09', '2021-02-16 16:08:30');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('4','11','Kto zostanie najlepszym specem od drinków w Twojej firmie?','Integracja jest ważna dla każdego zespołu. A jak najlepiej się zintegrować? Wspólnie przygotowując modne cocktaile! Warsztaty barmańskie online to doskonały program integracyjny, podczas którego najważniejsza będzie wspólna zabawa! Dodatkowo – nabytymi umiejętnościami barmańskimi będzie można zaimponować bliskim podczas domowych spotkań','SATURDAY, THURSDAY','1','ONLINE','amet','Konferencja','Polski','1', '2021-06-15 12:23:05', '2021-07-15 14:13:05');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('2','1','Crypto Connection 2021','This conference explores: Emerging FinTech, Prime Brokerage & Advisory Services, Credit & Risk Management, Compliance & Regulation','FRIDAY','0','ONLINE','sed','Prezentacja','Angielski','1', '2021-06-13 12:23:12', '2021-06-13 15:17:22');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('8','11','A day on neurodiversity','Explore science-based strategies for unlocking the full potential of differently wired brains.','SUNDAY','0','ONLINE','a,','Konferencja','Angielski','1', '2021-05-30 20:00:00', '2021-05-30 21:50:00');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('1','8','WIECZORY TEMATYCZNE','Od dusznych gangsterskich klubów przez świętojańskie noce pełne ognia i magii czy też wyprawy dookoła świata. Od prawdziwych horrorów pełnych wiedźm i upiorów po niezwykły świat "Alicji w krainie czarów" czy UV show w kompletnej ciemności - nie brakuje nam pomysłów na nietypowe imprezy.','WEDNESDAY','1','OFFLINE','laoreet ipsum.','Szkolenie','Polski','1', '2021-10-16 09:43:32', '2021-06-23 20:13:18');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('10','8','Teacher Leader Summit: The Virtual Series','The 2021 Teacher Leader Summit is a professional development conference which brings together Louisiana birth to grade 12 educators.','THURSDAY, FRIDAY','1','ONLINE.','porttitor','Konferencja','Angielski','1', '2021-06-14 18:56:14', '2021-07-14 20:13:17');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','11','Nokia Academy','NOKIA Academy to projekt prowadzony przez wrocławskie Centrum Research & Development Nokii. Jest to cykl intensywnych, bezpłatnych szkoleń prowadzonych przez specjalistów z naszej firmy.','THURSDAY','1','convallis','eu,','Szkolenie', 'Angielski','1', '2021-06-17 08:15:04', '2021-07-01 22:43:22');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','11','Comarch','enim, condimentum eget, volutpat ornare, facilisis eget, ipsum. Donec','WEDNESDAY','1','sodales','et','Prezentacja','Polski','0', '2021-04-13 00:15:04', '2021-04-05 22:43:22');
 INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('7','9','Aktren Michał Taran','Quisque tincidunt pede','SUNDAY','0','sem','per conubia','Konferencja','Polski','0', '2021-07-14 18:56:14','2021-07-14 20:13:17');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('2','4','Proidea SP. Z.O.O.','fames ac turpis egestas. Fusce aliquet magna a','MONDAY, THURSDAY, SATURDAY','1','aliquet','aliquet.','Konferencja','Angielski','1', '2020-10-28 11:46:39', '2022-02-06 20:09:46');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('7','11','Cognity szkolenia online','accumsan interdum libero','SUNDAY, TUESDAY','1','quam','non','Konferencja','Polski','0', '2020-03-23 09:01:33', '2020-03-23 18:34:09');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','2','Software mill academy','nonummy ac, feugiat non, lobortis quis,','SUNDAY, TUESDAY','1','arcu.','Mauris','Szkolenie','Angielski','1', '2020-09-26 12:12:33', '2021-02-06 10:21:22');
-INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('1','7','Grupa szkoleniowa solberg','tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis,','WEDNESDAY','0','pretium','sapien molestie orci','Szkolenie','Angielski','0', '2020-11-20 08:08:35', '2020-11-20 23:17:17');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('2','4','Proidea SP. Z.O.O.','fames ac turpis egestas. Fusce aliquet magna a','MONDAY, THURSDAY, SATURDAY','1','aliquet','aliquet.','Konferencja','Angielski','1', '2021-10-28 11:46:39', '2022-02-06 20:09:46');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('7','11','Cognity szkolenia online','accumsan interdum libero','SUNDAY, TUESDAY','1','quam','non','Konferencja','Polski','0', '2021-03-23 09:01:33', '2021-03-23 18:34:09');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('9','2','Software mill academy','nonummy ac, feugiat non, lobortis quis,','SUNDAY, TUESDAY','1','arcu.','Mauris','Szkolenie','Angielski','1', '2021-09-26 12:12:33', '2021-02-06 10:21:22');
+INSERT INTO `Events` (`User_id`,`Organization_id`,`Name`,`Description`,`days_of_week`,`Cyclical`,`Mode`,`Web_address`,`Tags`,`Language`,`Status`, `DateS`, `DateF`) VALUES ('1','7','Grupa szkoleniowa solberg','tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis,','WEDNESDAY','0','pretium','sapien molestie orci','Szkolenie','Angielski','0', '2021-06-05 08:08:35', '2021-06-05 23:17:17');
 
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-09-05 16:15:48','2021-09-05 16:49:05');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('10','2021-07-14 18:56:14','2021-07-14 20:13:17');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('2','2021-08-26 07:04:55','2021-08-26 22:02:54');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2020-10-28 11:46:39','2020-10-28 14:27:12');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('2','2021-06-12 07:04:55','2021-06-12 22:02:54');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2021-10-28 11:46:39','2021-10-28 14:27:12');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2021-02-06 05:29:26','2021-02-06 20:09:46');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('5','2021-02-16 15:02:09','2021-02-16 16:08:30');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('13','2021-08-29 10:46:13','2021-08-29 22:09:57');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-05-17 03:43:29','2021-05-17 08:11:01');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2020-12-12 01:47:34','2020-12-12 04:05:51');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2020-10-16 09:43:32','2020-10-16 12:38:27');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-06-17 03:43:29','2021-06-17 08:11:01');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2021-12-12 01:47:34','2021-12-12 04:05:51');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2021-10-16 09:43:32','2021-10-16 12:38:27');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2021-04-05 22:08:59','2021-04-05 22:43:22');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('3','2021-02-04 08:21:38','2021-02-04 19:44:54');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2020-04-13 00:15:04','2020-04-13 02:01:51');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('17','2020-11-20 08:08:35','2020-11-20 23:17:17');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('12','2021-04-13 00:15:04','2021-04-13 02:01:51');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('17','2021-06-05 08:08:35','2021-06-05 23:17:17');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('14','2021-09-13 11:08:03','2021-03-13 13:07:18');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2020-09-26 12:12:33','2020-09-26 16:34:13');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('8','2021-05-27 02:17:24','2021-05-27 21:51:32');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-04-03 18:04:46','2020-04-03 19:42:31');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-04-28 20:48:37','2021-04-28 22:26:06');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('4','2021-10-01 01:25:17','2021-10-01 03:41:27');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2021-03-15 13:26:56','2021-03-15 14:13:05');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2020-08-18 12:47:38','2020-08-18 14:27:49');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2021-09-26 12:12:33','2021-09-26 16:34:13');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('8','2021-05-30 20:00:00', '2021-05-30 21:50:00');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2021-04-03 18:04:46','2021-04-03 19:42:31');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-04-18 20:48:37','2021-04-18 22:26:06');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('4','2021-06-17 01:25:17','2021-06-17 03:41:27');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2021-06-15 13:26:56','2021-06-15 14:13:05');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-06-18 12:47:38','2021-06-18 14:27:49');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('9','2021-06-23 19:03:42','2021-06-23 20:13:18');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('7','2020-04-19 12:23:12','2020-04-19 15:17:22');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-02-22 07:13:52','2021-02-22 08:18:57');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2020-03-23 09:01:33','2020-03-23 18:34:09');
-INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2020-06-15 12:23:05','2020-06-15 18:13:41');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('7','2021-06-13 12:23:12','2021-06-13 15:17:22');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2021-06-10 07:13:52','2021-06-10 08:18:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('15','2021-03-23 09:01:33','2021-03-23 18:34:09');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('6','2021-07-15 12:23:05','2021-07-15 18:13:41');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('16','2021-02-06 06:19:23','2021-02-06 10:21:22');
 INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('13','2021-07-14 18:56:14','2021-07-14 20:13:17');
-
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('1','2022-02-22 05:18:57','2022-02-22 08:18:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('11','2021-06-17 08:15:04','2021-06-17 15:18:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('11','2021-06-24 08:15:04','2021-06-24 15:18:57');
+INSERT INTO `time_events` (`Event_id`,`Start_date`,`End_date`) VALUES ('11','2021-07-01 15:18:57','2021-07-01 22:43:22');
 
 INSERT INTO `user_events` (`User_id`,`Time_Event_id`) VALUES ('2','15');
 INSERT INTO `user_events` (`User_id`,`Time_Event_id`) VALUES ('9','4');
@@ -325,8 +327,7 @@ BEGIN
 END
 //
 
-CREATE DEFINER = CURRENT_USER TRIGGER `xeva`.`Events_AFTER_DELETE` AFTER DELETE ON `Events` FOR EACH ROW
-BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `events_BEFORE_DELETE` BEFORE DELETE ON `events` FOR EACH ROW BEGIN
 	delete from `time_events` where `Event_id` = old.id;
 END
 //
@@ -337,7 +338,7 @@ BEGIN
 END
 //
 
-CREATE DEFINER = CURRENT_USER TRIGGER `xeva`.`users_AFTER_DELETE` AFTER DELETE ON `users` FOR EACH ROW
+CREATE DEFINER = CURRENT_USER TRIGGER `xeva`.`users_BEFORE_DELETE` BEFORE DELETE ON `users` FOR EACH ROW
 BEGIN
 	delete from `events` where `user_id` = old.id;
     delete from `user_events` where `User_id` = old.id;
