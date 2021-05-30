@@ -136,8 +136,13 @@ public class UserController {
 
         TokenVerification userTokenVerification = tokenService.findByToken(confirmationToken);
         User user = userService.findById(userTokenVerification.getUser().getId());
-        userService.makeUserActiv(user.getId());
-        response.sendRedirect("http://localhost:3000/sign-in?register=true");
+        if(user.getIsEnabled() == true){
+            response.sendRedirect("http://localhost:3000/registration-link-expired");
+        } else {
+            userService.makeUserActiv(user.getId());
+            response.sendRedirect("http://localhost:3000/sign-in?register=true");
+        }
+
 
     }
 
