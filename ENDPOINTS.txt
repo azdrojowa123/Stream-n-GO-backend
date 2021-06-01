@@ -162,7 +162,7 @@ rekordy z tabeli TimeEvent
 	 	"surname",
 	 	"email",
 	 	"pwd", 
-	 	"role" -> jako string z nazwą roli.
+	 	"role" -> jako typ Role
         }
 	zwraca response w postaci
 	{	
@@ -176,10 +176,30 @@ rekordy z tabeli TimeEvent
 
 18. Get -> /admin/users/getOne/{id} -> zwraca użytwkonika o podanym id w postaci:
     {
+      "id",
+      "name",
+	  "surname",
+	  "email",
+	  "pwd",
+	  "role" -> jako string z nazwą roli.
+     }
+
+19. Get -> /admin/users/getOne/ -> Przyjmuje @RequestBody w postaci "String email". Zwraca użytwkonika o podanym email'u w postaci:
+        {
          "id",
          "name",
-	 "surname",
-	 "email",
-	 "pwd", 
-	 "role" -> jako string z nazwą roli.
-     }
+    	 "surname",
+    	 "email",
+    	 "pwd",
+    	 "role" -> jako string z nazwą roli.
+         }
+
+20. Get -> /admin/getUserList -> Przyjmuje @RequestParam w postaci "int page" i "int perPage". Zwraca daną stronę listy użytkowników użytwkoników:
+        {
+         "id",
+         "name",
+    	 "surname",
+    	 "email",
+    	 "pwd",
+    	 "role" -> jako string z nazwą roli.
+         }

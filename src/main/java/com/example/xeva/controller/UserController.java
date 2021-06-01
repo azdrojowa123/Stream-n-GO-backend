@@ -5,6 +5,8 @@ import com.example.xeva.dto.LoginResponseDTO;
 import com.example.xeva.dto.NewUserDTO;
 import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.UserDTO;
+import com.example.xeva.dto.admin.PAdminGetListDTO;
+import com.example.xeva.dto.admin.PAdminGetListOfUsersDTO;
 import com.example.xeva.dto.admin.ResponseEventAdminDTO;
 import com.example.xeva.dto.admin.ResponseUserAdminDTO;
 import com.example.xeva.mapper.EventMapper;
@@ -18,6 +20,7 @@ import com.example.xeva.service.interfaces.EventService;
 import com.example.xeva.service.interfaces.TokenService;
 import com.example.xeva.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -31,6 +34,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
@@ -135,7 +140,6 @@ public class UserController {
     @DeleteMapping("/admin/users/deleteUser/{id}")
     public ResponseEntity<ResponseUserAdminDTO> deleteUserAdmin(@PathVariable(value = "id") int id){
         User user = userService.findById(id);
-        System.out.println(user.toString());
         ResponseUserAdminDTO userDTO = userMapper.toResponseUserAddminDTO(user);
         userService.deleteByID(id);
         return new ResponseEntity(userDTO, HttpStatus.ACCEPTED);
@@ -144,19 +148,47 @@ public class UserController {
     @PutMapping("/admin/users/updateUser")
     public ResponseEntity<ResponseUserAdminDTO> updateUserAdmin(@RequestBody UserDTO userDTO){
         User mappedUser = userMapper.toUser(userDTO);
-        System.out.println("ROLE1" + mappedUser.getRole().toString());
         User updatedUser = userMapper.changeUpdateUser(mappedUser, userService.findById(mappedUser.getId()));
-        System.out.println("ROLE2" + updatedUser.getRole().toString());
         userService.save(updatedUser);
         ResponseUserAdminDTO responseUserDTO = userMapper.toResponseUserAddminDTO(updatedUser);
-        System.out.println("ROLE3" + responseUserDTO.getRole().toString());
         return new ResponseEntity(responseUserDTO, HttpStatus.OK);
     }
 
     @GetMapping(value = "/admin/users/getOne/{id}")
-    public ResponseEntity<ResponseUserAdminDTO> getUser(@PathVariable(value = "id") int id){
+    public ResponseEntity<ResponseUserAdminDTO> getUserByID(@PathVariable(value = "id") int id){
         User user = userService.findById(id);
         ResponseUserAdminDTO userDTO = userMapper.toResponseUserAddminDTO(user);
         return new ResponseEntity(userDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/admin/users/getOne")
+    public ResponseEntity<ResponseUserAdminDTO> getUserByEmail(@RequestBody String email){
+        User user = userService.findByEmail(email);
+        ResponseUserAdminDTO userDTO = userMapper.toResponseUserAddminDTO(user);
+        return new ResponseEntity(userDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/getUserList")
+    public ResponseEntity<ResponseUserAdminDTO> fetchUserAdminPanel(@RequestParam int page, @RequestParam int perPage){
+
+        List<ResponseUserAdminDTO> resultList = new ArrayList<>();
+        List<User> usersList = userService.findAll();
+        int first = page*perPage;
+        int last = first + perPage;
+        if (last > usersList.size()){
+            last = usersList.size();
+        }
+        for(int i = first; i<last; i++){
+            resultList.add(userMapper.toResponseUserAddminDTO(usersList.get(i)));
+        }
+        String temp = "users "+page+"-"+perPage+"/"+usersList.size();
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("Content-Range", temp);
+        responseHeaders.set("Access-Control-Expose-Headers",
+                "Content-Range");
+
+        PAdminGetListOfUsersDTO responseBody = new PAdminGetListOfUsersDTO(resultList,usersList.size());
+
+        return new ResponseEntity(responseBody, responseHeaders,  HttpStatus.OK);
     }
 }
