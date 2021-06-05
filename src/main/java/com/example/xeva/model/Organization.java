@@ -23,24 +23,19 @@ public class Organization {
 	@NotEmpty(message = "Name cannot be empty")
 	@Column(name = "Name")
 	private String name;
-	
-	@NotEmpty(message = "Country cannot be empty")
+
 	@Column(name = "Country")
 	private String country;
-	
-	@NotEmpty(message = "Province cannot be empty")
+
 	@Column(name = "Province")
 	private String province;
-	
-	@NotEmpty(message = "City cannot be empty")
+
 	@Column(name = "City")
 	private String city;
-	
-	@NotEmpty(message = "Postal Code cannot be empty")
+
 	@Column(name = "Postal_code")
 	private String postalCode;
-	
-	@NotEmpty(message = "Street cannot be empty")
+
 	@Column(name = "Street")
 	private String street;
 	
