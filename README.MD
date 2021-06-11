@@ -7,3 +7,4 @@ INSTALACJA:
     1.zmiana ustawień na swoją bazę w application.properties
     2.zbudowanie
     3.uruchomienie
+
