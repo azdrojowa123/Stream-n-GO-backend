@@ -3,7 +3,6 @@ package com.example.xeva.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +22,14 @@ public class EmailService {
     @Async
     public void sendEmail(SimpleMailMessage email) throws MessagingException {
         javaMailSender.send(email);
+    }
+
+    @Async
+    public void sendEmailWithHtml(MimeMessage email) throws MessagingException {
+        javaMailSender.send(email);
+    }
+
+    public MimeMessage createMime() throws MessagingException {
+         return javaMailSender.createMimeMessage();
     }
 }

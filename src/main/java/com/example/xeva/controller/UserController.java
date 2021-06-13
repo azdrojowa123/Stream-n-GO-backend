@@ -24,6 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -31,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -99,7 +101,6 @@ public class UserController {
         }
 
 
-
         User user = userMapper.toNewUser(userDTO);
         user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
         user.setIsEnabled(false);
@@ -112,9 +113,54 @@ public class UserController {
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Dokończenie rejestracji w aplikacji Xeva");
         mailMessage.setFrom("xeva.company@gmail.com");
-        mailMessage.setText("Aby potwierdzić rejestrację kliknij tutaj: "+
+        mailMessage.setText("<p>Simple HTML.</p>\n" +
+                "<h3><em>So very simple.</em></h3>\n" +
+                "<p><span style=\"color: #ff0000;\">Lame joke that follows.</span></p>\n" +
+                "<p>\n" +
+                "  <span style=\"color: #ff0000;\"\n" +
+                "    ><img\n" +
+                "      src=\"https://afinde-production.s3.amazonaws.com/uploads/981ebabb-5722-44c1-ad30-fc57fbc8ee9d.jpeg\"\n" +
+                "      alt=\"Lame joke\"\n" +
+                "      width=\"245\"\n" +
+                "      height=\"221\"\n" +
+                "  /></span>\n" +
+                "</p>\n" +
+                "<h2 style=\"padding-left: 30px;\">do you?</h2>\n" +
+                "<ul>\n" +
+                "  <li>yes</li>\n" +
+                "  <li>no</li>\n" +
+                "  <li><strong>not entirely sure</strong></li>\n" +
+                "</ul>"+
                 "http://localhost:8080/public/confirm-account?token="+userToken.getToken());
-        emailService.sendEmail(mailMessage);
+
+
+        MimeMessage mimeMessage = emailService.createMime();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+        String htmlMsg = "<p>Simple HTML.</p>\n" +
+                "<h3><em>So very simple.</em></h3>\n" +
+                "<p><span style=\"color: #ff0000;\">Lame joke that follows.</span></p>\n" +
+                "<p>\n" +
+                "  <span style=\"color: #ff0000;\"\n" +
+                "    ><img\n" +
+                "      src=\"https://afinde-production.s3.amazonaws.com/uploads/981ebabb-5722-44c1-ad30-fc57fbc8ee9d.jpeg\"\n" +
+                "      alt=\"Lame joke\"\n" +
+                "      width=\"245\"\n" +
+                "      height=\"221\"\n" +
+                "  /></span>\n" +
+                "</p>\n" +
+                "<h2 style=\"padding-left: 30px;\">do you?</h2>\n" +
+                "<ul>\n" +
+                "  <li>yes</li>\n" +
+                "  <li>no</li>\n" +
+                "  <li><strong>not entirely sure</strong></li>\n" +
+                "</ul>";
+        helper.setText(htmlMsg, true); // Use this or above line.
+        helper.setTo(user.getEmail());
+        helper.setSubject("This is the test message for testing gmail smtp server using spring mail");
+        helper.setFrom("xeva.company@gmail.com");
+
+
+        emailService.sendEmailWithHtml(mimeMessage);
 
         userService.save(user);
         tokenService.save(userToken);
