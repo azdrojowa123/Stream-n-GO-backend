@@ -1,29 +1,22 @@
 package com.example.xeva.controller;
 
-import com.example.xeva.dao.OrganizationRepository;
 import com.example.xeva.dto.LoginResponseDTO;
 import com.example.xeva.dto.NewUserDTO;
-import com.example.xeva.dto.ResponseEventSpecificationDTO;
 import com.example.xeva.dto.UserDTO;
-import com.example.xeva.dto.admin.PAdminGetListDTO;
 import com.example.xeva.dto.admin.PAdminGetListOfUsersDTO;
-import com.example.xeva.dto.admin.ResponseEventAdminDTO;
 import com.example.xeva.dto.admin.ResponseUserAdminDTO;
-import com.example.xeva.mapper.EventMapper;
 import com.example.xeva.mapper.UserMapper;
 import com.example.xeva.model.*;
 import com.example.xeva.security.JwtTokenUtil;
 import com.example.xeva.security.UserDetailsImpl;
 
 import com.example.xeva.service.impl.EmailService;
-import com.example.xeva.service.interfaces.EventService;
 import com.example.xeva.service.interfaces.TokenService;
 import com.example.xeva.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +27,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @CrossOrigin(origins= "*", allowedHeaders="*")
@@ -52,19 +48,8 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
-
-    @Autowired
-    private EventService eventService;
-
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private EventMapper eventMapper;
-
 
     @Autowired
     public PasswordEncoder passwordEncoder;
@@ -77,6 +62,32 @@ public class UserController {
 
     @Autowired
     private EmailService emailService;
+
+    public String createEmailMessage(String userToken, String userEmail) throws IOException {
+
+        Scanner scanner = new Scanner(Paths.get("bef_email.txt"), StandardCharsets.UTF_8.name());
+        String bef_email = scanner.useDelimiter("\\A").next();
+        scanner = new Scanner(Paths.get("after_email.txt"), StandardCharsets.UTF_8.name());
+        String after_email = scanner.useDelimiter("\\A").next();
+        scanner = new Scanner(Paths.get("after_link.txt"), StandardCharsets.UTF_8.name());
+        String after_link = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        String link = "http://localhost:8080/public/confirm-account?token="+userToken;
+        StringBuilder emailLink = new StringBuilder();
+        emailLink.append("<a href=");
+        emailLink.append("mailto:");
+        emailLink.append(userEmail);
+        emailLink.append(">");
+        emailLink.append(userEmail);
+        emailLink.append("</a>");
+        StringBuilder sb = new StringBuilder();
+        sb.append(bef_email);
+        sb.append(emailLink.toString());
+        sb.append(after_email);
+        sb.append(link);
+        sb.append(after_link);
+        return sb.toString();
+    }
 
     @PostMapping(value="/public/signin")
     public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody JwtRequest req) throws Exception {
@@ -100,68 +111,19 @@ public class UserController {
             throw new Exception(("Email already in use"));
         }
 
-
         User user = userMapper.toNewUser(userDTO);
         user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
         user.setIsEnabled(false);
 
-
         TokenVerification userToken = new TokenVerification(user);
-
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Dokończenie rejestracji w aplikacji Xeva");
-        mailMessage.setFrom("xeva.company@gmail.com");
-        mailMessage.setText("<p>Simple HTML.</p>\n" +
-                "<h3><em>So very simple.</em></h3>\n" +
-                "<p><span style=\"color: #ff0000;\">Lame joke that follows.</span></p>\n" +
-                "<p>\n" +
-                "  <span style=\"color: #ff0000;\"\n" +
-                "    ><img\n" +
-                "      src=\"https://afinde-production.s3.amazonaws.com/uploads/981ebabb-5722-44c1-ad30-fc57fbc8ee9d.jpeg\"\n" +
-                "      alt=\"Lame joke\"\n" +
-                "      width=\"245\"\n" +
-                "      height=\"221\"\n" +
-                "  /></span>\n" +
-                "</p>\n" +
-                "<h2 style=\"padding-left: 30px;\">do you?</h2>\n" +
-                "<ul>\n" +
-                "  <li>yes</li>\n" +
-                "  <li>no</li>\n" +
-                "  <li><strong>not entirely sure</strong></li>\n" +
-                "</ul>"+
-                "http://localhost:8080/public/confirm-account?token="+userToken.getToken());
-
-
+        String emailContent = createEmailMessage(userToken.getToken(), user.getEmail());
         MimeMessage mimeMessage = emailService.createMime();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-        String htmlMsg = "<p>Simple HTML.</p>\n" +
-                "<h3><em>So very simple.</em></h3>\n" +
-                "<p><span style=\"color: #ff0000;\">Lame joke that follows.</span></p>\n" +
-                "<p>\n" +
-                "  <span style=\"color: #ff0000;\"\n" +
-                "    ><img\n" +
-                "      src=\"https://afinde-production.s3.amazonaws.com/uploads/981ebabb-5722-44c1-ad30-fc57fbc8ee9d.jpeg\"\n" +
-                "      alt=\"Lame joke\"\n" +
-                "      width=\"245\"\n" +
-                "      height=\"221\"\n" +
-                "  /></span>\n" +
-                "</p>\n" +
-                "<h2 style=\"padding-left: 30px;\">do you?</h2>\n" +
-                "<ul>\n" +
-                "  <li>yes</li>\n" +
-                "  <li>no</li>\n" +
-                "  <li><strong>not entirely sure</strong></li>\n" +
-                "</ul>";
-        helper.setText(htmlMsg, true); // Use this or above line.
+        helper.setText(emailContent, true);
         helper.setTo(user.getEmail());
-        helper.setSubject("This is the test message for testing gmail smtp server using spring mail");
+        helper.setSubject("Welcome to STREAM'N GO, registration confirmation");
         helper.setFrom("xeva.company@gmail.com");
-
-
         emailService.sendEmailWithHtml(mimeMessage);
-
         userService.save(user);
         tokenService.save(userToken);
 
