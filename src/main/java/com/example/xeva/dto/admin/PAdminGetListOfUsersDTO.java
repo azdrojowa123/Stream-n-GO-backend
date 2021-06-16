@@ -1,21 +1,23 @@
 package com.example.xeva.dto.admin;
 
+import com.example.xeva.dto.UserDTO;
+
 import java.util.List;
 
 public class PAdminGetListOfUsersDTO {
-    List<ResponseUserAdminDTO> data;
+    List<UserDTO> data;
     int total;
 
-    public PAdminGetListOfUsersDTO(List<ResponseUserAdminDTO> data, int total) {
+    public PAdminGetListOfUsersDTO(List<UserDTO> data, int total) {
         this.data = data;
         this.total = total;
     }
 
-    public List<ResponseUserAdminDTO> getData() {
+    public List<UserDTO> getData() {
         return data;
     }
 
-    public void setData(List<ResponseUserAdminDTO> data) {
+    public void setData(List<UserDTO> data) {
         this.data = data;
     }
 

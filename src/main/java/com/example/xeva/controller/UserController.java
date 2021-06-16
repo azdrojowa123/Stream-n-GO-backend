@@ -177,9 +177,9 @@ public class UserController {
     }
 
     @GetMapping("/admin/getUserList")
-    public ResponseEntity<ResponseUserAdminDTO> fetchUserAdminPanel(@RequestParam int page, @RequestParam int perPage){
+    public ResponseEntity<UserDTO> fetchUserAdminPanel(@RequestParam int page, @RequestParam int perPage){
 
-        List<ResponseUserAdminDTO> resultList = new ArrayList<>();
+        List<UserDTO> resultList = new ArrayList<>();
         List<User> usersList = userService.findAll();
         int first = page*perPage;
         int last = first + perPage;
@@ -187,7 +187,7 @@ public class UserController {
             last = usersList.size();
         }
         for(int i = first; i<last; i++){
-            resultList.add(userMapper.toResponseUserAddminDTO(usersList.get(i)));
+            resultList.add(userMapper.toUserDTO(usersList.get(i)));
         }
         String temp = "users "+page+"-"+perPage+"/"+usersList.size();
         HttpHeaders responseHeaders = new HttpHeaders();

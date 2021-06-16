@@ -39,6 +39,18 @@ public abstract class UserMapper {
         return  user;
     }
 
+    public UserDTO toUserDTO(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setSurname(user.getSurname());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPwd(user.getPwd());
+        userDTO.setRole(user.getRole().getRoleName());
+
+        return  userDTO;
+    }
+
     public User changeUpdateUser(User newUser, User oldUser){
         oldUser.setName(newUser.getName());
         oldUser.setSurname(newUser.getSurname());
