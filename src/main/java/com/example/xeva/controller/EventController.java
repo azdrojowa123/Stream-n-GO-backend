@@ -112,7 +112,7 @@ public class EventController {
     }
 
     @GetMapping("/event/fetchPast")
-    public ResponseEntity<List<ResponseEventDTO>> fetchPast(@RequestBody String userEmail) {
+    public ResponseEntity<List<ResponseEventDTO>> fetchPast(@RequestHeader("From") String userEmail) {
 
         List<TimeEvent> listOfEvents = timeEventService.findPast();
         List<ResponseEventDTO> listOfResponses = new ArrayList<>();
@@ -126,7 +126,7 @@ public class EventController {
     }
 
     @GetMapping("/event/fetchFuture")
-    public ResponseEntity<List<ResponseEventDTO>> fetchFuture(@RequestBody String userEmail) {
+    public ResponseEntity<List<ResponseEventDTO>> fetchFuture(@RequestHeader("From") String userEmail) {
 
         List<TimeEvent> listOfEvents = timeEventService.findFuture();
         List<ResponseEventDTO> listOfResponses = new ArrayList<>();
