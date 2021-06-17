@@ -31,7 +31,6 @@ public class Event {
 	@Column(name = "Description")
 	private String description;
 
-	@NotEmpty(message = "Days of week cannot be empty")
 	@Column(name = "days_of_week")
 	private String daysOfWeek;
 
